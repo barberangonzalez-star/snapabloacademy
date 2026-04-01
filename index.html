@@ -220,6 +220,8 @@ footer { border-top:1px solid rgba(255,255,255,0.08); padding:44px 48px; display
 
 /* MOBILE */
 @media (max-width:768px) {
+  .clubs-banner-wrap { padding:0 20px !important; }
+  .clubs-banner-wrap a { width:100%; justify-content:center; }
   nav { padding:13px 20px; background:rgba(10,10,10,0.98); }
   .nav-logo { font-size:11px; letter-spacing:0.08em; }
   .nav-logo-icon { width:28px; height:28px; }
@@ -240,6 +242,7 @@ footer { border-top:1px solid rgba(255,255,255,0.08); padding:44px 48px; display
   .proof-label { font-size:10px; }
   .promise-section { padding:30px 24px; margin:0 20px; }
   section { padding:56px 20px; }
+  .clubs-banner { padding:0 20px !important; }
   .what-grid { grid-template-columns:1fr; gap:28px; margin-top:32px; }
   .what-text p { font-size:14px; margin-top:14px; }
   .what-text .btn-primary { width:100%; justify-content:center; }
@@ -279,7 +282,12 @@ footer { border-top:1px solid rgba(255,255,255,0.08); padding:44px 48px; display
 <nav>
   <div class="nav-logo">
     <!-- LOGO: reemplaza este bloque con <img src="logo.png" style="height:36px;"> -->
-   <img src="logo.png" style="height:36px;width:auto;">
+    <div class="nav-logo-icon">
+      <svg width="18" height="18" viewBox="0 0 40 40" fill="none">
+        <path d="M12 28 Q16 12 20 20 Q24 28 28 12" stroke="#c9a84c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <span class="nav-logo-text">San Pablo Academy</span>
   </div>
   <a href="https://wa.me/59163509172?text=Hola%2C%20quiero%20suscribirme%20al%20Newsletter%20Consciente" target="_blank" class="nav-cta">
     <svg class="icon" width="13" height="13" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
@@ -367,7 +375,7 @@ footer { border-top:1px solid rgba(255,255,255,0.08); padding:44px 48px; display
             <div class="email-dot" style="background:#e67e22;display:inline-block;margin-left:4px;"></div>
             <div class="email-dot" style="background:#27ae60;display:inline-block;margin-left:4px;"></div>
           </div>
-          <div class="email-from"><strong>San Pablo Academy</strong>newsletter@sanpablo.com</div>
+          <div class="email-from"><strong>San Pablo Academy</strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d7b9b2a0a4bbb2a3a3b2a597a4b6b9a7b6b5bbb8f9b4b8ba">[email&#160;protected]</a></div>
         </div>
         <div class="email-title-line">
           <svg class="icon icon-gold" width="14" height="14" viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 14H8v-2h8v2zm0-4H8v-2h8v2zm0-4H8V6h8v2z"/></svg>
@@ -447,6 +455,20 @@ footer { border-top:1px solid rgba(255,255,255,0.08); padding:44px 48px; display
   <div class="scroll-hint"><svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Desliza para ver más</div>
 </section>
 
+<!-- CLUBES BANNER -->
+<div class="clubs-banner-wrap" style="max-width:1100px;margin:0 auto;padding:0 48px 0;">
+  <div style="background:linear-gradient(135deg,rgba(201,168,76,0.1),rgba(201,168,76,0.03));border:1px solid rgba(201,168,76,0.35);padding:40px 48px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+    <div>
+      <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#c9a84c;margin-bottom:10px;">📚 Disponibles este mes</div>
+      <div style="font-family:'Playfair Display',serif;font-size:clamp(20px,3vw,30px);font-weight:900;color:#f5f0e8;margin-bottom:8px;">Únete a nuestros <span style="color:#c9a84c">Clubes de Lectura</span></div>
+      <p style="color:#d4cfc6;font-size:14px;line-height:1.6;max-width:480px;">Lee en comunidad guiado por mentores expertos. +8 clubes este mes con diferentes libros y temáticas.</p>
+    </div>
+    <a href="clubes.html" style="flex-shrink:0;background:#c9a84c;color:#0a0a0a;padding:15px 28px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:14px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;">
+      Ver catálogo →
+    </a>
+  </div>
+</div>
+
 <!-- PRODUCTS -->
 <section>
   <div class="section-label">Ecosistema San Pablo</div>
@@ -459,11 +481,11 @@ footer { border-top:1px solid rgba(255,255,255,0.08); padding:44px 48px; display
       <p>La esencia de +10 libros al mes directo en tu correo. 1 minuto al día para transformar tu conocimiento en acción.</p>
       <a href="https://wa.me/59163509172?text=Hola%2C%20quiero%20suscribirme%20al%20Newsletter%20Consciente" target="_blank" class="product-link">Suscribirme ahora →</a>
     </div>
-    <div class="product-card">
+    <div class="product-card" style="border-color:rgba(201,168,76,0.25);">
       <span class="product-icon"><svg class="icon icon-gold" width="40" height="40" viewBox="0 0 24 24"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/></svg></span>
       <h3>Clubes de <em>Lectura</em></h3>
-      <p>Lee en comunidad. Comparte perspectivas y conviértete en parte de una tribu lectora única.</p>
-      <a href="https://wa.me/59163509172?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20los%20clubes%20de%20lectura" target="_blank" class="product-link">Saber más →</a>
+      <p>Lee en comunidad. Comparte perspectivas y conviértete en parte de una tribu lectora única. +8 clubes activos este mes.</p>
+      <a href="clubes.html" class="product-link" style="font-size:12px;color:#c9a84c;border-bottom-color:rgba(201,168,76,0.5);">Ver catálogo de clubes →</a>
     </div>
     <div class="product-card">
       <span class="product-icon"><svg class="icon icon-gold" width="40" height="40" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg></span>
@@ -600,13 +622,6 @@ footer { border-top:1px solid rgba(255,255,255,0.08); padding:44px 48px; display
   </a>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
-  });
-}, { threshold: 0.08 });
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-</script>
-</body>
-</html>
+  entries.forEach
