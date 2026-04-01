@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin – San Pablo Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:ital,wght@0,300;0,400;0,600;0,700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0a0a0a;--card:#161616;--border:rgba(255,255,255,0.08);--white:#f5f0e8;--gold:#c9a84c;--gold-light:#e8c97a;--gray:#888;--text:#d4cfc6;--red:#e74c3c;--green:#27ae60;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:#0a0a0a;color:#f5f0e8;font-family:'DM Sans',sans-serif;}
+
+.login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(201,168,76,0.06) 0%,transparent 70%);}
+.login-box{background:#161616;border:1px solid rgba(201,168,76,0.3);padding:48px 40px;width:100%;max-width:380px;}
+.login-logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:#c9a84c;margin-bottom:6px;}
+.login-sub{font-size:12px;color:#888;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:32px;}
+.login-label{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#888;margin-bottom:8px;display:block;}
+.login-input{width:100%;background:#0a0a0a;border:1px solid rgba(255,255,255,0.1);color:#f5f0e8;padding:12px 14px;font-family:'DM Sans',sans-serif;font-size:14px;margin-bottom:16px;outline:none;transition:border-color .2s;}
+.login-input:focus{border-color:#c9a84c;}
+.login-btn{width:100%;background:#c9a84c;color:#0a0a0a;padding:14px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:14px;border:none;cursor:pointer;transition:background .2s;margin-top:8px;}
+.login-btn:hover{background:#e8c97a;}
+.login-error{color:#e74c3c;font-size:12px;margin-top:8px;display:none;}
+.login-hint{margin-top:20px;font-size:11px;color:#555;text-align:center;}
+.login-hint strong{color:#888;}
+
+.dashboard{display:none;min-height:100vh;}
+.dash-nav{position:sticky;top:0;z-index:100;background:#0d0d0d;border-bottom:1px solid rgba(255,255,255,0.06);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;}
+.dash-nav-logo{font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:#c9a84c;}
+.dash-nav-right{display:flex;align-items:center;gap:16px;}
+.dash-nav-link{color:#888;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;transition:color .2s;}
+.dash-nav-link:hover{color:#c9a84c;}
+.btn-logout{background:transparent;border:1px solid rgba(255,255,255,0.1);color:#888;padding:7px 14px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;}
+.btn-logout:hover{border-color:#e74c3c;color:#e74c3c;}
+
+.dash-content{max-width:1150px;margin:0 auto;padding:40px 32px;}
+.dash-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:16px;}
+.dash-title{font-family:'Playfair Display',serif;font-size:32px;font-weight:900;}
+.dash-title em{font-style:normal;color:#c9a84c;}
+.btn-new{background:#c9a84c;color:#0a0a0a;padding:12px 24px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background .2s;}
+.btn-new:hover{background:#e8c97a;}
+
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-bottom:32px;}
+.stat-card{background:#161616;border:1px solid rgba(255,255,255,0.08);padding:22px 24px;}
+.stat-num{font-family:'Playfair Display',serif;font-size:38px;font-weight:900;color:#c9a84c;}
+.stat-label{font-size:11px;color:#888;letter-spacing:0.1em;text-transform:uppercase;margin-top:4px;}
+
+.table-wrap{background:#161616;border:1px solid rgba(255,255,255,0.08);overflow-x:auto;}
+.clubs-table{width:100%;border-collapse:collapse;}
+.clubs-table th{text-align:left;padding:13px 18px;font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#888;border-bottom:1px solid rgba(255,255,255,0.06);white-space:nowrap;}
+.clubs-table td{padding:14px 18px;font-size:13px;color:#d4cfc6;border-bottom:1px solid rgba(255,255,255,0.04);vertical-align:middle;}
+.clubs-table tr:last-child td{border-bottom:none;}
+.clubs-table tr:hover td{background:rgba(255,255,255,0.02);}
+.td-title{font-weight:600;color:#f5f0e8;}
+.td-author{font-size:11px;color:#666;font-style:italic;margin-top:2px;}
+.td-mentor-name{font-weight:500;color:#d4cfc6;}
+.td-mentor-prof{font-size:11px;color:#666;font-style:italic;margin-top:2px;}
+.td-img{width:40px;height:56px;object-fit:cover;background:#1e1e1e;display:block;}
+.td-img-ph{width:40px;height:56px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;}
+.badge{display:inline-flex;padding:3px 10px;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;}
+.badge-activo{background:rgba(39,174,96,0.15);color:#27ae60;border:1px solid rgba(39,174,96,0.3);}
+.badge-proximo{background:rgba(201,168,76,0.15);color:#c9a84c;border:1px solid rgba(201,168,76,0.3);}
+.badge-finalizado{background:rgba(136,136,136,0.1);color:#666;border:1px solid rgba(136,136,136,0.2);}
+.td-actions{display:flex;gap:8px;}
+.btn-edit{background:transparent;border:1px solid rgba(201,168,76,0.3);color:#c9a84c;padding:6px 14px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.btn-edit:hover{background:rgba(201,168,76,0.1);}
+.btn-del{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#666;padding:6px 14px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;}
+.btn-del:hover{border-color:#e74c3c;color:#e74c3c;}
+.empty-row td{text-align:center;padding:48px;color:#555;}
+
+.form-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:900;display:none;align-items:flex-start;justify-content:center;padding:32px 20px;overflow-y:auto;}
+.form-overlay.open{display:flex;}
+.form-box{background:#161616;border:1px solid rgba(201,168,76,0.3);width:100%;max-width:620px;padding:36px;position:relative;margin:auto;}
+.form-close{position:absolute;top:14px;right:14px;background:none;border:none;color:#888;cursor:pointer;font-size:20px;}
+.form-close:hover{color:#f5f0e8;}
+.form-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:#f5f0e8;margin-bottom:24px;}
+.form-title em{font-style:normal;color:#c9a84c;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.form-group{display:flex;flex-direction:column;gap:6px;}
+.form-group.full{grid-column:1/-1;}
+.form-label{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#888;}
+.form-input,.form-select,.form-textarea{background:#0d0d0d;border:1px solid rgba(255,255,255,0.1);color:#f5f0e8;padding:11px 13px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color .2s;width:100%;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:#c9a84c;}
+.form-textarea{resize:vertical;min-height:76px;}
+.form-select option{background:#161616;}
+.form-note{font-size:11px;color:#555;margin-top:3px;}
+.img-preview{width:100%;max-height:140px;object-fit:cover;display:none;margin-top:8px;}
+.img-preview.show{display:block;}
+.form-actions{display:flex;gap:12px;margin-top:22px;}
+.btn-save{background:#c9a84c;color:#0a0a0a;padding:13px 32px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:14px;border:none;cursor:pointer;flex:1;transition:background .2s;}
+.btn-save:hover{background:#e8c97a;}
+.btn-cancel{background:transparent;border:1px solid rgba(255,255,255,0.1);color:#888;padding:13px 24px;font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer;transition:all .2s;}
+.btn-cancel:hover{border-color:#f5f0e8;color:#f5f0e8;}
+
+.toast{position:fixed;bottom:24px;right:24px;background:#161616;border-left:4px solid #27ae60;color:#f5f0e8;padding:13px 20px;font-size:13px;font-weight:600;z-index:1000;transform:translateX(200px);opacity:0;transition:all .3s;max-width:280px;}
+.toast.show{transform:translateX(0);opacity:1;}
+.toast.err{border-left-color:#e74c3c;}
+
+@media(max-width:800px){
+  .dash-content{padding:24px 16px;}
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .form-grid{grid-template-columns:1fr;}
+  .form-group.full{grid-column:auto;}
+  .dash-nav{padding:12px 16px;}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">San Pablo</div>
+    <div class="login-sub">Panel de Administración</div>
+    <label class="login-label">Contraseña</label>
+    <input type="password" class="login-input" id="passInput" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">Ingresar →</button>
+    <div class="login-error" id="loginError">Contraseña incorrecta</div>
+    <div class="login-hint">Contraseña: <strong>sanpablo2025</strong></div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dashboard" id="dashboard">
+  <nav class="dash-nav">
+    <div class="dash-nav-logo">✦ San Pablo Admin</div>
+    <div class="dash-nav-right">
+      <a href="index.html" class="dash-nav-link" target="_blank">Landing →</a>
+      <a href="clubes.html" class="dash-nav-link" target="_blank">Clubes →</a>
+      <button class="btn-logout" onclick="doLogout()">Salir</button>
+    </div>
+  </nav>
+
+  <div class="dash-content">
+    <div class="dash-header">
+      <div class="dash-title">Clubes de <em>Lectura</em></div>
+      <button class="btn-new" onclick="openForm()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+        Nuevo Club
+      </button>
+    </div>
+
+    <div class="stats-row" id="statsRow">
+      <div class="stat-card"><div class="stat-num" id="sTotal">0</div><div class="stat-label">Total</div></div>
+      <div class="stat-card"><div class="stat-num" id="sActivos">0</div><div class="stat-label">Activos</div></div>
+      <div class="stat-card"><div class="stat-num" id="sProximos">0</div><div class="stat-label">Próximos</div></div>
+      <div class="stat-card"><div class="stat-num" id="sFinalizados">0</div><div class="stat-label">Finalizados</div></div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="clubs-table">
+        <thead>
+          <tr>
+            <th>Portada</th>
+            <th>Libro</th>
+            <th>Mentor</th>
+            <th>Fechas</th>
+            <th>Cupos</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- FORM -->
+<div class="form-overlay" id="formOverlay">
+  <div class="form-box">
+    <button class="form-close" onclick="closeForm()">✕</button>
+    <div class="form-title" id="formTitle">Nuevo <em>Club</em></div>
+    <input type="hidden" id="editId">
+    <div class="form-grid">
+
+      <div class="form-group full">
+        <label class="form-label">Título del Libro *</label>
+        <input class="form-input" id="fTitulo" placeholder="ej. Atomic Habits">
+      </div>
+
+      <div class="form-group full">
+        <label class="form-label">Autor</label>
+        <input class="form-input" id="fAutor" placeholder="ej. James Clear">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Mentor *</label>
+        <input class="form-input" id="fMentor" placeholder="Nombre completo">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Profesión del Mentor</label>
+        <input class="form-input" id="fMentorProf" placeholder="ej. Psicóloga Organizacional">
+      </div>
+
+      <div class="form-group full">
+        <label class="form-label">URL de portada del libro</label>
+        <input class="form-input" id="fImg" placeholder="https://..." oninput="previewImg()">
+        <div class="form-note">Pega la URL de una imagen de la portada (JPG, PNG, WebP)</div>
+        <img id="imgPrev" class="img-preview" alt="Vista previa">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Fecha de inicio *</label>
+        <input class="form-input" id="fInicio" type="date">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Fecha de fin *</label>
+        <input class="form-input" id="fFin" type="date">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Cupos disponibles</label>
+        <input class="form-input" id="fCupos" type="number" placeholder="10" min="0">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Estado</label>
+        <select class="form-select" id="fEstado">
+          <option value="proximo">🔵 Próximo</option>
+          <option value="activo">🟢 Activo</option>
+          <option value="finalizado">⚫ Finalizado</option>
+        </select>
+      </div>
+
+      <div class="form-group full">
+        <label class="form-label">Descripción</label>
+        <textarea class="form-textarea" id="fDesc" placeholder="Describe de qué trata este club..."></textarea>
+      </div>
+
+    </div>
+    <div class="form-actions">
+      <button class="btn-save" onclick="saveClub()">Guardar Club</button>
+      <button class="btn-cancel" onclick="closeForm()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const PASS = 'sanpablo2025';
+const KEY = 'sp_clubs_v1';
+
+function doLogin() {
+  if (document.getElementById('passInput').value === PASS) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    render(); stats();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+  }
+}
+function doLogout() {
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('passInput').value = '';
+}
+
+function getClubs() {
+  try { const r = localStorage.getItem(KEY); return r ? JSON.parse(r) : seed(); }
+  catch(e) { return seed(); }
+}
+function setClubs(c) { localStorage.setItem(KEY, JSON.stringify(c)); }
+function seed() {
+  const c = [
+    {id:1,titulo:'Atomic Habits',autor:'James Clear',mentor:'María González',mentorProfesion:'Coach de Hábitos y Bienestar',fechaInicio:'2025-05-05',fechaFin:'2025-05-26',estado:'proximo',cupos:12,img:'',descripcion:'Descubre el sistema de los hábitos atómicos.'},
+    {id:2,titulo:'El Poder del Ahora',autor:'Eckhart Tolle',mentor:'Carlos Mamani',mentorProfesion:'Psicólogo y Mindfulness',fechaInicio:'2025-04-07',fechaFin:'2025-04-28',estado:'activo',cupos:8,img:'',descripcion:'Un viaje hacia la consciencia plena.'},
+    {id:3,titulo:'Pensar Rápido, Pensar Despacio',autor:'Daniel Kahneman',mentor:'Ana Rodríguez',mentorProfesion:'Economista Conductual',fechaInicio:'2025-05-12',fechaFin:'2025-06-02',estado:'proximo',cupos:15,img:'',descripcion:'Explora los dos sistemas de pensamiento.'},
+    {id:4,titulo:'El Hombre en Busca de Sentido',autor:'Viktor Frankl',mentor:'Luis Pereira',mentorProfesion:'Psicoterapeuta',fechaInicio:'2025-03-03',fechaFin:'2025-03-24',estado:'finalizado',cupos:0,img:'',descripcion:'Logoterapia y propósito de vida.'},
+    {id:5,titulo:'Los 7 Hábitos de la Gente Altamente Efectiva',autor:'Stephen Covey',mentor:'Patricia Vega',mentorProfesion:'Consultora de Liderazgo',fechaInicio:'2025-06-02',fechaFin:'2025-06-23',estado:'proximo',cupos:20,img:'',descripcion:'Principios de efectividad personal y profesional.'},
+    {id:6,titulo:'Inteligencia Emocional',autor:'Daniel Goleman',mentor:'Sofía Cárdenas',mentorProfesion:'Psicóloga Organizacional',fechaInicio:'2025-04-14',fechaFin:'2025-05-05',estado:'activo',cupos:10,img:'',descripcion:'Reconoce, comprende y gestiona tus emociones.'},
+    {id:7,titulo:'El Arte de la Guerra',autor:'Sun Tzu',mentor:'Roberto Arce',mentorProfesion:'Estratega de Negocios',fechaInicio:'2025-06-09',fechaFin:'2025-06-30',estado:'proximo',cupos:14,img:'',descripcion:'Estrategia milenaria aplicada al mundo moderno.'},
+    {id:8,titulo:'Sapiens',autor:'Yuval Noah Harari',mentor:'Carmen Flores',mentorProfesion:'Historiadora y Docente',fechaInicio:'2025-07-07',fechaFin:'2025-07-28',estado:'proximo',cupos:18,img:'',descripcion:'La historia completa de la humanidad.'}
+  ];
+  setClubs(c); return c;
+}
+function nextId(c) { return c.length ? Math.max(...c.map(x=>x.id))+1 : 1; }
+function fmtDate(d) {
+  if (!d) return '—';
+  const [y,m,day] = d.split('-');
+  const mo=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  return `${parseInt(day)} ${mo[parseInt(m)-1]} ${y}`;
+}
+
+function stats() {
+  const c = getClubs();
+  document.getElementById('sTotal').textContent = c.length;
+  document.getElementById('sActivos').textContent = c.filter(x=>x.estado==='activo').length;
+  document.getElementById('sProximos').textContent = c.filter(x=>x.estado==='proximo').length;
+  document.getElementById('sFinalizados').textContent = c.filter(x=>x.estado==='finalizado').length;
+}
+
+function render() {
+  const clubs = getClubs();
+  const tbody = document.getElementById('tbody');
+  if (!clubs.length) {
+    tbody.innerHTML = `<tr class="empty-row"><td colspan="7">Sin clubes. Haz clic en "Nuevo Club".</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = clubs.map(c => `
+    <tr>
+      <td>${c.img?`<img class="td-img" src="${c.img}" alt="">`:`<div class="td-img-ph"><svg width="16" height="16" viewBox="0 0 24 24" fill="#333"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 14H8v-2h8v2zm0-4H8v-2h8v2zm0-4H8V6h8v2z"/></svg></div>`}</td>
+      <td><div class="td-title">${c.titulo}</div>${c.autor?`<div class="td-author">${c.autor}</div>`:''}</td>
+      <td><div class="td-mentor-name">${c.mentor}</div>${c.mentorProfesion?`<div class="td-mentor-prof">${c.mentorProfesion}</div>`:''}</td>
+      <td style="font-size:12px;white-space:nowrap">${fmtDate(c.fechaInicio)}<br><span style="color:#555">→ ${fmtDate(c.fechaFin)}</span></td>
+      <td style="text-align:center;font-weight:700;color:#c9a84c">${c.cupos}</td>
+      <td><span class="badge badge-${c.estado}">${c.estado}</span></td>
+      <td><div class="td-actions">
+        <button class="btn-edit" onclick="openForm(${c.id})">Editar</button>
+        <button class="btn-del" onclick="delClub(${c.id})">Eliminar</button>
+      </div></td>
+    </tr>`).join('');
+}
+
+function openForm(id) {
+  document.getElementById('formOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  clearForm();
+  if (id) {
+    const c = getClubs().find(x=>x.id===id); if (!c) return;
+    document.getElementById('formTitle').innerHTML = 'Editar <em>Club</em>';
+    document.getElementById('editId').value = id;
+    document.getElementById('fTitulo').value = c.titulo;
+    document.getElementById('fAutor').value = c.autor||'';
+    document.getElementById('fMentor').value = c.mentor;
+    document.getElementById('fMentorProf').value = c.mentorProfesion||'';
+    document.getElementById('fImg').value = c.img||'';
+    document.getElementById('fCupos').value = c.cupos;
+    document.getElementById('fInicio').value = c.fechaInicio;
+    document.getElementById('fFin').value = c.fechaFin;
+    document.getElementById('fEstado').value = c.estado;
+    document.getElementById('fDesc').value = c.descripcion||'';
+    previewImg();
+  } else {
+    document.getElementById('formTitle').innerHTML = 'Nuevo <em>Club</em>';
+    document.getElementById('editId').value = '';
+  }
+}
+function clearForm() {
+  ['fTitulo','fAutor','fMentor','fMentorProf','fImg','fCupos','fInicio','fFin','fDesc'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('fEstado').value='proximo';
+  document.getElementById('imgPrev').className='img-preview';
+}
+function closeForm() {
+  document.getElementById('formOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function previewImg() {
+  const url = document.getElementById('fImg').value.trim();
+  const img = document.getElementById('imgPrev');
+  if (url) { img.src=url; img.className='img-preview show'; }
+  else { img.className='img-preview'; }
+}
+
+function saveClub() {
+  const titulo = document.getElementById('fTitulo').value.trim();
+  const mentor = document.getElementById('fMentor').value.trim();
+  if (!titulo||!mentor) { toast('Completa los campos obligatorios (*)',true); return; }
+  const clubs = getClubs();
+  const eid = parseInt(document.getElementById('editId').value);
+  const data = {
+    titulo, autor:document.getElementById('fAutor').value.trim(),
+    mentor, mentorProfesion:document.getElementById('fMentorProf').value.trim(),
+    img:document.getElementById('fImg').value.trim(),
+    cupos:parseInt(document.getElementById('fCupos').value)||0,
+    fechaInicio:document.getElementById('fInicio').value,
+    fechaFin:document.getElementById('fFin').value,
+    estado:document.getElementById('fEstado').value,
+    descripcion:document.getElementById('fDesc').value.trim()
+  };
+  if (eid) { const i=clubs.findIndex(c=>c.id===eid); if(i>=0) clubs[i]={...clubs[i],...data}; }
+  else { clubs.push({id:nextId(clubs),...data}); }
+  setClubs(clubs); render(); stats(); closeForm();
+  toast(eid?'Club actualizado ✓':'Club creado ✓');
+}
+
+function delClub(id) {
+  if (!confirm('¿Eliminar este club?')) return;
+  setClubs(getClubs().filter(c=>c.id!==id));
+  render(); stats(); toast('Club eliminado');
+}
+
+function toast(msg, err) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (err?' err':'');
+  setTimeout(()=>{ t.className='toast'; }, 3000);
+}
+
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeForm(); });
+</script>
+</body>
+</html>

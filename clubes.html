@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clubes de Lectura – San Pablo Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:ital,wght@0,300;0,400;0,600;0,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black:#0a0a0a; --card:#161616; --border:rgba(255,255,255,0.08);
+  --white:#f5f0e8; --gold:#c9a84c; --gold-light:#e8c97a;
+  --gray:#888; --text:#d4cfc6;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:#0a0a0a;color:#f5f0e8;font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:16px 48px;display:flex;align-items:center;justify-content:space-between;
+  background:rgba(10,10,10,0.97);border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:#c9a84c;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;}
+.nav-logo img{height:32px;width:auto;}
+.nav-back{color:#c9a84c;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;gap:6px;opacity:0.8;transition:opacity .2s;}
+.nav-back:hover{opacity:1;}
+
+.hero{
+  padding:140px 48px 80px;text-align:center;position:relative;
+  background:radial-gradient(ellipse 70% 50% at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 70%);
+}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid #c9a84c;color:#c9a84c;padding:5px 14px;font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:24px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,6vw,72px);font-weight:900;line-height:1.05;letter-spacing:-0.02em;margin-bottom:16px;}
+.hero h1 em{font-style:normal;color:#c9a84c;}
+.hero p{font-size:17px;color:#d4cfc6;max-width:560px;margin:0 auto;line-height:1.7;}
+
+.filter-bar{max-width:1200px;margin:0 auto;padding:0 48px 48px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.filter-btn{background:transparent;border:1px solid rgba(255,255,255,0.15);color:#888;padding:7px 18px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:all .2s;}
+.filter-btn.active,.filter-btn:hover{border-color:#c9a84c;color:#c9a84c;background:rgba(201,168,76,0.06);}
+.filter-label{font-size:11px;color:#888;letter-spacing:0.1em;text-transform:uppercase;margin-right:4px;}
+
+.catalog{max-width:1200px;margin:0 auto;padding:0 48px 80px;}
+.catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2px;}
+
+.club-card{background:#161616;border:1px solid rgba(255,255,255,0.08);display:flex;flex-direction:column;overflow:hidden;transition:border-color .3s,transform .3s;cursor:pointer;}
+.club-card:hover{border-color:rgba(201,168,76,0.4);transform:translateY(-2px);}
+.club-card-img{width:100%;aspect-ratio:2/3;object-fit:cover;background:#1e1e1e;display:block;}
+.club-card-img-placeholder{width:100%;aspect-ratio:2/3;background:linear-gradient(135deg,#1a1a1a,#222);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;}
+.club-card-img-placeholder svg{opacity:0.15;}
+.club-card-img-placeholder span{font-size:10px;color:#444;letter-spacing:0.1em;text-transform:uppercase;}
+.club-card-body{padding:20px;flex:1;display:flex;flex-direction:column;gap:10px;}
+.club-card-tag{font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#c9a84c;}
+.club-card-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;line-height:1.2;color:#f5f0e8;}
+.club-card-author{font-size:12px;color:#888;font-style:italic;}
+.club-card-meta{display:flex;flex-direction:column;gap:5px;margin-top:auto;padding-top:10px;border-top:1px solid rgba(255,255,255,0.05);}
+.club-meta-row{display:flex;align-items:flex-start;gap:7px;font-size:12px;color:#888;}
+.club-meta-row svg{flex-shrink:0;margin-top:1px;}
+.club-meta-row strong{color:#d4cfc6;}
+.mentor-prof{font-size:11px;color:#666;font-style:italic;}
+.club-card-footer{padding:14px 20px;border-top:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:space-between;}
+.club-spots{font-size:11px;color:#888;}
+.club-spots span{color:#c9a84c;font-weight:700;}
+.btn-club{background:#c9a84c;color:#0a0a0a;padding:8px 18px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:12px;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:5px;transition:background .2s;}
+.btn-club:hover{background:#e8c97a;}
+
+.empty-state{text-align:center;padding:80px 24px;grid-column:1/-1;}
+.empty-state h3{font-family:'Playfair Display',serif;font-size:24px;color:#f5f0e8;margin-bottom:8px;}
+.empty-state p{color:#888;font-size:14px;}
+
+/* PRICING */
+.pricing-section{background:#0d0d0d;border-top:1px solid rgba(255,255,255,0.06);padding:96px 48px;}
+.pricing-inner{max-width:1000px;margin:0 auto;}
+.section-label{font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#c9a84c;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.section-label::before{content:'';display:block;width:28px;height:1px;background:#c9a84c;}
+.pricing-inner h2{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,48px);font-weight:900;line-height:1.1;margin-bottom:48px;color:#f5f0e8;}
+.pricing-inner h2 em{font-style:normal;color:#c9a84c;}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.pricing-card{background:#161616;border:1px solid rgba(255,255,255,0.08);padding:40px 32px;display:flex;flex-direction:column;gap:20px;position:relative;overflow:hidden;}
+.pricing-card.featured{border-color:rgba(201,168,76,0.5);background:#1a1a14;}
+.pricing-card.featured::before{content:'MÁS POPULAR';position:absolute;top:16px;right:-24px;background:#c9a84c;color:#0a0a0a;font-size:8px;font-weight:700;letter-spacing:0.15em;padding:4px 36px;transform:rotate(45deg);}
+.pricing-badge{font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#c9a84c;}
+.pricing-name{font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:#f5f0e8;}
+.pricing-price{display:flex;align-items:baseline;gap:6px;}
+.pricing-currency{font-size:16px;color:#888;font-weight:600;}
+.pricing-amount{font-family:'Playfair Display',serif;font-size:52px;font-weight:900;color:#f5f0e8;line-height:1;}
+.pricing-amount.free{font-size:36px;color:#c9a84c;}
+.pricing-period{font-size:12px;color:#888;}
+.pricing-divider{height:1px;background:rgba(255,255,255,0.08);}
+.pricing-features{display:flex;flex-direction:column;gap:10px;flex:1;}
+.pricing-feature{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#d4cfc6;line-height:1.5;}
+.pricing-feature svg{flex-shrink:0;margin-top:2px;}
+.pricing-feature.off{color:#555;}
+.pricing-feature.off svg{opacity:0.3;}
+.btn-pricing{width:100%;padding:14px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.05em;border:none;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;}
+.btn-gold{background:#c9a84c;color:#0a0a0a;}
+.btn-gold:hover{background:#e8c97a;}
+.btn-outline{background:transparent;color:#c9a84c;border:1px solid rgba(201,168,76,0.4);}
+.btn-outline:hover{background:rgba(201,168,76,0.08);border-color:#c9a84c;}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:900;display:none;align-items:center;justify-content:center;padding:24px;}
+.modal-overlay.open{display:flex;}
+.modal{background:#161616;border:1px solid rgba(201,168,76,0.3);max-width:540px;width:100%;max-height:90vh;overflow-y:auto;position:relative;}
+.modal-close{position:absolute;top:14px;right:14px;background:none;border:none;color:#888;cursor:pointer;font-size:20px;z-index:1;}
+.modal-close:hover{color:#f5f0e8;}
+.modal-img{width:100%;max-height:260px;object-fit:cover;display:block;background:#1e1e1e;}
+.modal-body{padding:28px;}
+.modal-tag{font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#c9a84c;margin-bottom:8px;}
+.modal-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:#f5f0e8;margin-bottom:4px;line-height:1.2;}
+.modal-author{font-size:13px;color:#888;font-style:italic;margin-bottom:18px;}
+.modal-meta{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;padding:18px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.05);}
+.modal-meta-row{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#d4cfc6;}
+.modal-meta-row strong{color:#f5f0e8;min-width:70px;flex-shrink:0;}
+.modal-mentor-block{display:flex;flex-direction:column;gap:2px;}
+.modal-mentor-name{color:#f5f0e8;font-weight:600;}
+.modal-mentor-prof{font-size:11px;color:#888;font-style:italic;}
+.modal-desc{font-size:14px;color:#d4cfc6;line-height:1.7;margin-bottom:22px;}
+.modal-actions{display:flex;flex-direction:column;gap:10px;}
+.btn-wa{background:#25d366;color:#fff;padding:14px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:14px;border:none;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .2s;}
+.btn-wa:hover{background:#1fbb57;}
+.btn-wa-outline{background:transparent;color:#25d366;border:1px solid rgba(37,211,102,0.3);padding:12px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;}
+.btn-wa-outline:hover{background:rgba(37,211,102,0.06);border-color:#25d366;}
+
+@media(max-width:900px){
+  nav{padding:14px 20px;}
+  .hero{padding:110px 20px 60px;}
+  .filter-bar{padding:0 20px 32px;}
+  .catalog{padding:0 20px 60px;}
+  .pricing-section{padding:64px 20px;}
+  .pricing-grid{grid-template-columns:1fr;}
+  .pricing-card.featured::before{display:none;}
+}
+@media(max-width:600px){
+  .catalog-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:400px){
+  .catalog-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.png" alt="San Pablo" onerror="this.style.display='none'">
+    <span>San Pablo Academy</span>
+  </a>
+  <a href="index.html" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+    Volver
+  </a>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">📚 Clubes de Lectura</div>
+  <h1>Únete a nuestros<br><em>Clubes de Lectura</em></h1>
+  <p>Lee en comunidad, comparte perspectivas y transforma cada libro en una experiencia de crecimiento guiada por un mentor experto.</p>
+</div>
+
+<div class="filter-bar">
+  <span class="filter-label">Filtrar:</span>
+  <button class="filter-btn active" onclick="filterClubs(this,'todos')">Todos</button>
+  <button class="filter-btn" onclick="filterClubs(this,'activo')">Activos</button>
+  <button class="filter-btn" onclick="filterClubs(this,'proximo')">Próximos</button>
+  <button class="filter-btn" onclick="filterClubs(this,'finalizado')">Finalizados</button>
+</div>
+
+<div class="catalog">
+  <div class="catalog-grid" id="catalogGrid"></div>
+</div>
+
+<!-- PRICING -->
+<div class="pricing-section">
+  <div class="pricing-inner">
+    <div class="section-label">Membresías</div>
+    <h2>Elige tu plan<br><em>lector</em></h2>
+    <div class="pricing-grid">
+
+      <div class="pricing-card">
+        <div class="pricing-badge">Para empezar</div>
+        <div class="pricing-name">Prueba Gratuita</div>
+        <div class="pricing-price"><span class="pricing-amount free">GRATIS</span></div>
+        <div class="pricing-divider"></div>
+        <div class="pricing-features">
+          <div class="pricing-feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="#c9a84c"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>1 sesión de prueba en cualquier club</div>
+          <div class="pricing-feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="#c9a84c"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Acceso a la comunidad de lectores</div>
+          <div class="pricing-feature off"><svg width="14" height="14" viewBox="0 0 24 24" fill="#555"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>Club completo</div>
+          <div class="pricing-feature off"><svg width="14" height="14" viewBox="0 0 24 24" fill="#555"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>Libro incluido</div>
+          <div class="pricing-feature off"><svg width="14" height="14" viewBox="0 0 24 24" fill="#555"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>Sesiones con mentor</div>
+        </div>
+        <a href="https://wa.me/59163509172?text=Hola%2C%20quiero%20probar%20un%20club%20de%20lectura%20gratis" target="_blank" class="btn-pricing btn-outline">Quiero probar gratis →</a>
+      </div>
+
+      <div class="pricing-card featured">
+        <div class="pricing-badge">⭐ Más popular</div>
+        <div class="pricing-name">Lector Iniciado</div>
+        <div class="pricing-price"><span class="pricing-currency">Bs.</span><span class="pricing-amount">55</span><span class="pricing-period">/ club</span></div>
+        <div class="pricing-divider"></div>
+        <div class="pricing-features">
+          <div class="pricing-feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="#c9a84c"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Acceso completo al club del mes</div>
+          <div class="pricing-feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="#c9a84c"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Todas las sesiones con mentor</div>
+          <div class="pricing-feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="#c9a84c"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Comunidad exclusiva de lectores</div>
+          <div class="pricing-feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="#c9a84c"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Resúmenes y material del club</div>
+          <div class="pricing-feature off"><svg width="14" height="14" viewBox="0 0 24 24" fill="#555"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>Libro incluido</div>
+        </div>
+        <a href="https://wa.me/59163509172?text=Hola%2C%20quiero%20unirme%20como%20Lector%20Iniciado%20Bs.55" target="_blank" class="btn-pricing btn-gold">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.099 1.51 5.822L0 24l6.336-1.498A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.646-.493-5.172-1.355l-.371-.219-3.763.889.938-3.647-.24-.386A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Quiero este plan →
+        </a>
+      </div>
+
+      <div class="pricing-card">
+        <div class="pricing-badge">Todo incluido</div>
+        <div class="pricing-name">Lector Master</div>
+        <div class="pricing-price"><span class="pricing-currency">Bs.</span><span class="pricing-amount">???</span><span class="pricing-period">/ club</span></div>
+        <div class="pricing-divider"></div>
+        <div class="pricing-features">
+          <div class="pricing-feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="#c9a84c"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Todo lo del plan Iniciado</div>
+          <div class="pricing-feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="#c9a84c"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>📖 Libro del club incluido</div>
+          <div class="pricing-feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="#c9a84c"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Sesión 1:1 con el mentor</div>
+          <div class="pricing-feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="#c9a84c"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Acceso prioritario a nuevos clubes</div>
+          <div class="pricing-feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="#c9a84c"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Certificado de participación</div>
+        </div>
+        <a href="https://wa.me/59163509172?text=Hola%2C%20quiero%20unirme%20como%20Lector%20Master%20(con%20libro%20incluido)" target="_blank" class="btn-pricing btn-outline">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.099 1.51 5.822L0 24l6.336-1.498A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.646-.493-5.172-1.355l-.371-.219-3.763.889.938-3.647-.24-.386A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Quiero este plan →
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalBg(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <img id="modalImg" class="modal-img" src="" alt="" style="display:none;">
+    <div class="modal-body">
+      <div class="modal-tag" id="modalTag"></div>
+      <div class="modal-title" id="modalTitle"></div>
+      <div class="modal-author" id="modalAuthor"></div>
+      <div class="modal-meta" id="modalMeta"></div>
+      <div class="modal-desc" id="modalDesc"></div>
+      <div class="modal-actions">
+        <a id="modalWaIniciado" href="#" target="_blank" class="btn-wa">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.099 1.51 5.822L0 24l6.336-1.498A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.646-.493-5.172-1.355l-.371-.219-3.763.889.938-3.647-.24-.386A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Inscribirme — Lector Iniciado (Bs. 55)
+        </a>
+        <a id="modalWaMaster" href="#" target="_blank" class="btn-wa-outline">
+          Inscribirme — Lector Master (con libro incluido)
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const STORAGE_KEY = 'sp_clubs_v1';
+
+function getClubs() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : getDefaultClubs();
+  } catch(e) { return getDefaultClubs(); }
+}
+
+function getDefaultClubs() {
+  const clubs = [
+    { id:1, titulo:'Atomic Habits', autor:'James Clear', mentor:'María González', mentorProfesion:'Coach de Hábitos y Bienestar', fechaInicio:'2025-05-05', fechaFin:'2025-05-26', estado:'proximo', cupos:12, img:'', descripcion:'Descubre el sistema de los hábitos atómicos y construye mejores rutinas de forma sostenible con tu grupo de lectores.' },
+    { id:2, titulo:'El Poder del Ahora', autor:'Eckhart Tolle', mentor:'Carlos Mamani', mentorProfesion:'Psicólogo y Mindfulness', fechaInicio:'2025-04-07', fechaFin:'2025-04-28', estado:'activo', cupos:8, img:'', descripcion:'Un viaje hacia la consciencia plena y la presencia. Aprende a vivir en el momento con tu comunidad lectora.' },
+    { id:3, titulo:'Pensar Rápido, Pensar Despacio', autor:'Daniel Kahneman', mentor:'Ana Rodríguez', mentorProfesion:'Economista Conductual', fechaInicio:'2025-05-12', fechaFin:'2025-06-02', estado:'proximo', cupos:15, img:'', descripcion:'Explora los dos sistemas de pensamiento y cómo afectan tus decisiones cotidianas.' },
+    { id:4, titulo:'El Hombre en Busca de Sentido', autor:'Viktor Frankl', mentor:'Luis Pereira', mentorProfesion:'Psicoterapeuta', fechaInicio:'2025-03-03', fechaFin:'2025-03-24', estado:'finalizado', cupos:0, img:'', descripcion:'Explora la logoterapia y cómo encontrar propósito incluso en las circunstancias más difíciles.' },
+    { id:5, titulo:'Los 7 Hábitos de la Gente Altamente Efectiva', autor:'Stephen Covey', mentor:'Patricia Vega', mentorProfesion:'Consultora de Liderazgo', fechaInicio:'2025-06-02', fechaFin:'2025-06-23', estado:'proximo', cupos:20, img:'', descripcion:'Los principios atemporales de efectividad personal y profesional que transforman cómo trabajamos y nos relacionamos.' },
+    { id:6, titulo:'Inteligencia Emocional', autor:'Daniel Goleman', mentor:'Sofía Cárdenas', mentorProfesion:'Psicóloga Organizacional', fechaInicio:'2025-04-14', fechaFin:'2025-05-05', estado:'activo', cupos:10, img:'', descripcion:'Aprende a reconocer, comprender y gestionar tus emociones para mejorar tus relaciones y tu desempeño.' },
+    { id:7, titulo:'El Arte de la Guerra', autor:'Sun Tzu', mentor:'Roberto Arce', mentorProfesion:'Estratega de Negocios', fechaInicio:'2025-06-09', fechaFin:'2025-06-30', estado:'proximo', cupos:14, img:'', descripcion:'Aplicación de los principios milenarios de estrategia al mundo empresarial y la vida diaria.' },
+    { id:8, titulo:'Sapiens', autor:'Yuval Noah Harari', mentor:'Carmen Flores', mentorProfesion:'Historiadora y Docente', fechaInicio:'2025-07-07', fechaFin:'2025-07-28', estado:'proximo', cupos:18, img:'', descripcion:'Un recorrido fascinante por la historia de la humanidad y los mitos que nos hicieron dominar el planeta.' }
+  ];
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(clubs));
+  return clubs;
+}
+
+function formatDate(d) {
+  if (!d) return '—';
+  const [y,m,day] = d.split('-');
+  const months = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  return `${parseInt(day)} ${months[parseInt(m)-1]}`;
+}
+
+function renderClubs(filter) {
+  const clubs = getClubs();
+  const grid = document.getElementById('catalogGrid');
+  const list = filter === 'todos' ? clubs : clubs.filter(c => c.estado === filter);
+
+  if (!list.length) {
+    grid.innerHTML = `<div class="empty-state"><h3>Sin clubes disponibles</h3><p>Próximamente nuevos clubes. ¡Suscríbete al newsletter para enterarte primero!</p></div>`;
+    return;
+  }
+
+  const estadoLabel = { activo:'🟢 Activo', proximo:'🔵 Próximo', finalizado:'⚫ Finalizado' };
+
+  grid.innerHTML = list.map(c => {
+    const imgHTML = c.img
+      ? `<img class="club-card-img" src="${c.img}" alt="${c.titulo}">`
+      : `<div class="club-card-img-placeholder"><svg width="44" height="44" viewBox="0 0 24 24" fill="#333"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 14H8v-2h8v2zm0-4H8v-2h8v2zm0-4H8V6h8v2z"/></svg><span>Portada pendiente</span></div>`;
+
+    return `
+    <div class="club-card" onclick="openModal(${c.id})">
+      ${imgHTML}
+      <div class="club-card-body">
+        <div class="club-card-tag">${estadoLabel[c.estado] || c.estado}</div>
+        <div class="club-card-title">${c.titulo}</div>
+        ${c.autor ? `<div class="club-card-author">${c.autor}</div>` : ''}
+        <div class="club-card-meta">
+          <div class="club-meta-row">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="#c9a84c"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            <div>
+              <strong>${c.mentor}</strong>
+              ${c.mentorProfesion ? `<div class="mentor-prof">${c.mentorProfesion}</div>` : ''}
+            </div>
+          </div>
+          <div class="club-meta-row">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="#666"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
+            <span>${formatDate(c.fechaInicio)} → ${formatDate(c.fechaFin)}</span>
+          </div>
+        </div>
+      </div>
+      <div class="club-card-footer">
+        <div class="club-spots">${c.estado === 'finalizado' ? '<span style="color:#555">Finalizado</span>' : `Cupos: <span>${c.cupos}</span>`}</div>
+        <button class="btn-club" onclick="event.stopPropagation();openModal(${c.id})">Ver más →</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterClubs(btn, filter) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderClubs(filter);
+}
+
+function openModal(id) {
+  const c = getClubs().find(cl => cl.id === id);
+  if (!c) return;
+  const img = document.getElementById('modalImg');
+  if (c.img) { img.src = c.img; img.style.display = 'block'; }
+  else { img.style.display = 'none'; }
+
+  const estadoLabel = { activo:'🟢 Club Activo', proximo:'🔵 Próximamente', finalizado:'⚫ Finalizado' };
+  document.getElementById('modalTag').textContent = estadoLabel[c.estado] || c.estado;
+  document.getElementById('modalTitle').textContent = c.titulo;
+  document.getElementById('modalAuthor').textContent = c.autor ? `${c.autor}` : '';
+  document.getElementById('modalMeta').innerHTML = `
+    <div class="modal-meta-row">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="#c9a84c"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+      <strong>Mentor</strong>
+      <div class="modal-mentor-block">
+        <span class="modal-mentor-name">${c.mentor}</span>
+        ${c.mentorProfesion ? `<span class="modal-mentor-prof">${c.mentorProfesion}</span>` : ''}
+      </div>
+    </div>
+    <div class="modal-meta-row">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="#666"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
+      <strong>Inicio</strong>${formatDate(c.fechaInicio)}
+    </div>
+    <div class="modal-meta-row">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="#666"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
+      <strong>Fin</strong>${formatDate(c.fechaFin)}
+    </div>
+    <div class="modal-meta-row">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="#666"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+      <strong>Cupos</strong>${c.estado === 'finalizado' ? 'Club finalizado' : `${c.cupos} disponibles`}
+    </div>
+  `;
+  document.getElementById('modalDesc').textContent = c.descripcion || '';
+
+  const msg = encodeURIComponent(`Hola, quiero inscribirme al club de lectura: "${c.titulo}" — Lector Iniciado`);
+  const msgM = encodeURIComponent(`Hola, quiero inscribirme al club: "${c.titulo}" — Lector Master (con libro)`);
+  document.getElementById('modalWaIniciado').href = `https://wa.me/59163509172?text=${msg}`;
+  document.getElementById('modalWaMaster').href = `https://wa.me/59163509172?text=${msgM}`;
+
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModalBg(e) { if (e.target === document.getElementById('modalOverlay')) closeModal(); }
+function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow = ''; }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+renderClubs('todos');
+</script>
+</body>
+</html>
