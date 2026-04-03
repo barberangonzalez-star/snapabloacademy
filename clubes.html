@@ -449,7 +449,40 @@ function closeMBg(e){if(e.target===document.getElementById('modalOverlay'))close
 function closeModal(){document.getElementById('modalOverlay').classList.remove('open');document.body.style.overflow='';}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 
-renderClubs('todos');
+// renderClubs called after Firebase load
+</script>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyCjBhio3KBYKt-6YAyJSqIQqe6qJNxu-JA",
+  authDomain: "sanpablo-academy.firebaseapp.com",
+  projectId: "sanpablo-academy",
+  storageBucket: "sanpablo-academy.firebasestorage.app",
+  messagingSenderId: "516900437138",
+  appId: "1:516900437138:web:9ba04c23900088b4a07a4b"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+</script>
+<script>
+// Override: load clubs from Firebase
+async function loadClubsFromFirebase() {
+  try {
+    const snap = await db.collection('clubs').orderBy('id').get();
+    if (snap.empty) return null;
+    return snap.docs.map(d => d.data());
+  } catch(e) { console.error('Firebase error:', e); return null; }
+}
+
+// Re-render after loading from Firebase
+loadClubsFromFirebase().then(clubs => {
+  if (clubs && clubs.length > 0) {
+    localStorage.setItem('sp_clubs_v1', JSON.stringify(clubs));
+  }
+  renderClubs('todos');
+});
 </script>
 </body>
 </html>

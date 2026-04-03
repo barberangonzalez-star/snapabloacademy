@@ -126,6 +126,7 @@ body{background:#0a0a0a;color:#f5f0e8;font-family:'DM Sans',sans-serif;}
   <nav class="dash-nav">
     <div class="dash-nav-logo">✦ San Pablo Admin</div>
     <div class="dash-nav-right">
+      <span id="syncStatus" style="font-size:11px;color:#27ae60;letter-spacing:0.08em;opacity:0;transition:opacity .5s;"></span>
       <a href="index.html" class="dash-nav-link" target="_blank">Landing →</a>
       <a href="clubes.html" class="dash-nav-link" target="_blank">Clubes →</a>
       <a href="mentores.html" class="dash-nav-link" target="_blank">Mentores →</a>
@@ -355,6 +356,21 @@ body{background:#0a0a0a;color:#f5f0e8;font-family:'DM Sans',sans-serif;}
 
 <div class="toast" id="toast"></div>
 
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyCjBhio3KBYKt-6YAyJSqIQqe6qJNxu-JA",
+  authDomain: "sanpablo-academy.firebaseapp.com",
+  projectId: "sanpablo-academy",
+  storageBucket: "sanpablo-academy.firebasestorage.app",
+  messagingSenderId: "516900437138",
+  appId: "1:516900437138:web:9ba04c23900088b4a07a4b"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+</script>
 <script>
 const PASS = 'sanpablo2025';
 const KEY = 'sp_clubs_v1';
@@ -363,7 +379,8 @@ function doLogin() {
   if (document.getElementById('passInput').value === PASS) {
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('dashboard').style.display = 'block';
-    render(); stats();
+    // Load from Firebase first, then render
+    loadFromFirebase();
   } else {
     document.getElementById('loginError').style.display = 'block';
   }
@@ -378,7 +395,25 @@ function getClubs() {
   try { const r = localStorage.getItem(KEY); return r ? JSON.parse(r) : seed(); }
   catch(e) { return seed(); }
 }
-function setClubs(c) { localStorage.setItem(KEY, JSON.stringify(c)); }
+function setClubs(c) {
+  localStorage.setItem(KEY, JSON.stringify(c));
+  // Write each club to Firebase
+  const batch = db.batch();
+  // First delete all, then re-add (simple approach)
+  db.collection('clubs').get().then(snap => {
+    snap.docs.forEach(doc => batch.delete(doc.ref));
+    c.forEach(club => {
+      const ref = db.collection('clubs').doc(String(club.id));
+      batch.set(ref, club);
+    });
+    batch.commit().then(() => {
+      showSyncStatus('✓ Guardado en la nube');
+    }).catch(e => {
+      showSyncStatus('⚠ Error al sincronizar', true);
+      console.error(e);
+    });
+  });
+}
 function seed() {
   const c = [
     {id:1,titulo:'Atomic Habits',autor:'James Clear',mentor:'María González',mentorProfesion:'Coach de Hábitos y Bienestar',fechaInicio:'2025-05-05',fechaFin:'2025-05-26',estado:'proximo',cupos:12,img:'',descripcion:'Descubre el sistema de los hábitos atómicos.'},
@@ -507,6 +542,39 @@ function toast(msg, err) {
 
 document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeForm(); closeMentorForm(); } });
 
+// ── FIREBASE SYNC ─────────────────────────────────────────────────────────
+function showSyncStatus(msg, isError) {
+  const el = document.getElementById('syncStatus');
+  if(!el) return;
+  el.textContent = msg;
+  el.style.color = isError ? '#e74c3c' : '#27ae60';
+  el.style.opacity = '1';
+  setTimeout(() => { el.style.opacity = '0'; }, 3000);
+}
+
+async function loadFromFirebase() {
+  showSyncStatus('Cargando desde la nube...');
+  try {
+    // Load clubs
+    const clubsSnap = await db.collection('clubs').orderBy('id').get();
+    if (!clubsSnap.empty) {
+      const clubs = clubsSnap.docs.map(d => d.data());
+      localStorage.setItem(KEY, JSON.stringify(clubs));
+    }
+    // Load mentores
+    const mentoresSnap = await db.collection('mentores').orderBy('id').get();
+    if (!mentoresSnap.empty) {
+      const mentores = mentoresSnap.docs.map(d => d.data());
+      localStorage.setItem(MKEY, JSON.stringify(mentores));
+    }
+    showSyncStatus('✓ Datos cargados');
+  } catch(e) {
+    showSyncStatus('⚠ Sin conexión, usando datos locales', true);
+    console.error(e);
+  }
+  render(); stats();
+}
+
 // ── TABS ──────────────────────────────────────────────
 function switchTab(tab) {
   const isClubs = tab === 'clubs';
@@ -524,7 +592,23 @@ const MKEY = 'sp_mentores_v1';
 function getMentores() {
   try { const r = localStorage.getItem(MKEY); return r ? JSON.parse(r) : []; } catch(e) { return []; }
 }
-function setMentores(m) { localStorage.setItem(MKEY, JSON.stringify(m)); }
+function setMentores(m) {
+  localStorage.setItem(MKEY, JSON.stringify(m));
+  const batch = db.batch();
+  db.collection('mentores').get().then(snap => {
+    snap.docs.forEach(doc => batch.delete(doc.ref));
+    m.forEach(mentor => {
+      const ref = db.collection('mentores').doc(String(mentor.id));
+      batch.set(ref, mentor);
+    });
+    batch.commit().then(() => {
+      showSyncStatus('✓ Guardado en la nube');
+    }).catch(e => {
+      showSyncStatus('⚠ Error al sincronizar', true);
+      console.error(e);
+    });
+  });
+}
 function nextMId(m) { return m.length ? Math.max(...m.map(x=>x.id))+1 : 1; }
 
 function mentorStats() {
