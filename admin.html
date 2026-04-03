@@ -324,10 +324,18 @@ body{background:#0a0a0a;color:#f5f0e8;font-family:'DM Sans',sans-serif;}
         <input class="form-input" id="mSkillsN" type="number" placeholder="0" min="0">
       </div>
       <div class="form-group full">
-        <label class="form-label">URL foto del mentor</label>
-        <input class="form-input" id="mFoto" placeholder="https://..." oninput="previewMFoto()">
-        <div class="form-note">URL de una foto profesional del mentor</div>
-        <img id="mFotoPrev" class="img-preview" alt="Vista previa">
+        <label class="form-label">Foto del mentor</label>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+          <button type="button" onclick="document.getElementById('mFotoFile').click()" style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.35);color:#c9a84c;padding:10px 20px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all .2s;" onmouseover="this.style.background='rgba(201,168,76,0.2)'" onmouseout="this.style.background='rgba(201,168,76,0.1)'">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+            Subir foto
+          </button>
+          <span id="mFotoNombre" style="font-size:12px;color:#888;font-style:italic;">Sin foto seleccionada</span>
+        </div>
+        <input type="file" id="mFotoFile" accept="image/*" style="display:none;" onchange="handleMFoto(this)">
+        <div class="form-note">JPG, PNG o WebP. Recomendado: foto cuadrada o vertical.</div>
+        <img id="mFotoPrev" class="img-preview" alt="Vista previa" style="max-height:180px;object-fit:cover;object-position:top;">
+        <input type="hidden" id="mFoto">
       </div>
       <div class="form-group full">
         <label class="form-label">Habilidades (separadas por coma)</label>
@@ -561,29 +569,51 @@ function openMentorForm(id) {
     document.getElementById('mClubsN').value=m.clubes||0;
     document.getElementById('mSkillsN').value=m.skillbooks||0;
     document.getElementById('mFoto').value=m.foto||'';
+    document.getElementById('mFotoFile').value='';
     document.getElementById('mSkillTags').value=(m.skills||[]).join(', ');
     document.getElementById('mBio').value=m.bio||'';
-    previewMFoto();
+    // Show existing photo preview
+    if(m.foto) {
+      const prev = document.getElementById('mFotoPrev');
+      prev.src = m.foto;
+      prev.className = 'img-preview show';
+      document.getElementById('mFotoNombre').textContent = 'Foto guardada';
+    }
   } else {
     document.getElementById('mentorFormTitle').innerHTML='Nuevo <em>Mentor</em>';
     document.getElementById('mEditId').value='';
   }
 }
 function clearMentorForm() {
-  ['mNombre','mProfesion','mCiudad','mExperiencia','mFoto','mSkillTags','mBio'].forEach(id=>document.getElementById(id).value='');
+  ['mNombre','mProfesion','mCiudad','mExperiencia','mSkillTags','mBio'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('mClubsN').value=0;
   document.getElementById('mSkillsN').value=0;
   document.getElementById('mEspecialidad').value='habitos';
+  document.getElementById('mFoto').value='';
+  document.getElementById('mFotoFile').value='';
+  document.getElementById('mFotoNombre').textContent='Sin foto seleccionada';
   document.getElementById('mFotoPrev').className='img-preview';
 }
 function closeMentorForm() {
   document.getElementById('mentorFormOverlay').classList.remove('open');
   document.body.style.overflow='';
 }
-function previewMFoto() {
-  const url=document.getElementById('mFoto').value.trim();
-  const img=document.getElementById('mFotoPrev');
-  if(url){img.src=url;img.className='img-preview show';}else{img.className='img-preview';}
+function previewMFoto() {} // legacy, not used
+function handleMFoto(input) {
+  const file = input.files[0];
+  if (!file) return;
+  // Show filename
+  document.getElementById('mFotoNombre').textContent = file.name;
+  // Convert to base64 and store
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const base64 = e.target.result;
+    document.getElementById('mFoto').value = base64;
+    const prev = document.getElementById('mFotoPrev');
+    prev.src = base64;
+    prev.className = 'img-preview show';
+  };
+  reader.readAsDataURL(file);
 }
 function saveMentor() {
   const nombre=document.getElementById('mNombre').value.trim();
