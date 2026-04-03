@@ -179,6 +179,21 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 48px;display:fle
   .catalog-grid{grid-template-columns:1fr;}
 }
 </style>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyCjBhio3KBYKt-6YAyJSqIQqe6qJNxu-JA",
+  authDomain: "sanpablo-academy.firebaseapp.com",
+  projectId: "sanpablo-academy",
+  storageBucket: "sanpablo-academy.firebasestorage.app",
+  messagingSenderId: "516900437138",
+  appId: "1:516900437138:web:9ba04c23900088b4a07a4b"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+</script>
 </head>
 <body>
 
@@ -450,21 +465,6 @@ function closeModal(){document.getElementById('modalOverlay').classList.remove('
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 
 // renderClubs called after Firebase load
-</script>
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-<script>
-const firebaseConfig = {
-  apiKey: "AIzaSyCjBhio3KBYKt-6YAyJSqIQqe6qJNxu-JA",
-  authDomain: "sanpablo-academy.firebaseapp.com",
-  projectId: "sanpablo-academy",
-  storageBucket: "sanpablo-academy.firebasestorage.app",
-  messagingSenderId: "516900437138",
-  appId: "1:516900437138:web:9ba04c23900088b4a07a4b"
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
 </script>
 <script>
 // Override: load clubs from Firebase
