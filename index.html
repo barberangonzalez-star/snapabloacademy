@@ -3,737 +3,250 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Newsletter Consciente – San Pablo Academy</title>
+<title>San Pablo Academy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:ital,wght@0,300;0,400;0,600;0,700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --black: #0a0a0a;
-  --card: #161616;
-  --border: rgba(255,255,255,0.08);
-  --white: #f5f0e8;
-  --gold: #c9a84c;
-  --gold-light: #e8c97a;
-  --gray: #888888;
-  --text: #d4cfc6;
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-body { background-color:#0a0a0a; color:#f5f0e8; font-family:'DM Sans',sans-serif; overflow-x:hidden; }
-
-.icon { display:inline-block; vertical-align:middle; fill:currentColor; flex-shrink:0; }
-.icon-gold { color:#c9a84c; }
-.icon-white { color:#f5f0e8; }
+:root{--black:#0a0a0a;--card:#161616;--border:rgba(255,255,255,0.08);--white:#f5f0e8;--gold:#c9a84c;--gold-light:#e8c97a;--gray:#888;--text:#d4cfc6;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{background:#0a0a0a;color:#f5f0e8;font-family:"DM Sans",sans-serif;overflow-x:hidden;}
+.icon{display:inline-block;vertical-align:middle;fill:currentColor;flex-shrink:0;}
+.icon-gold{color:#c9a84c;}
 
 /* NAV */
-nav {
-  position:fixed; top:0; left:0; right:0; z-index:500;
-  padding:18px 48px; display:flex; align-items:center; justify-content:space-between;
-  background:linear-gradient(to bottom, rgba(10,10,10,0.97), transparent);
-}
-.nav-logo {
-  display:flex; align-items:center; gap:10px;
-  font-size:13px; font-weight:600; letter-spacing:0.12em;
-  text-transform:uppercase; color:#c9a84c;
-}
-.nav-logo-icon {
-  width:36px; height:36px; border-radius:50%;
-  border:1.5px solid #c9a84c; display:flex; align-items:center; justify-content:center;
-  flex-shrink:0;
-}
-/* Replace this SVG with <img src="logo.png"> once you add your logo file */
-.nav-cta {
-  background:#c9a84c; color:#0a0a0a; padding:10px 22px;
-  font-family:'DM Sans',sans-serif; font-weight:700; font-size:13px;
-  text-decoration:none; display:inline-flex; align-items:center; gap:7px;
-  transition:background .2s, transform .2s;
-}
-.nav-cta:hover { background:#e8c97a; transform:translateY(-1px); }
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(10,10,10,0.97),transparent);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo img{height:36px;width:auto;}
+.nav-logo-text{font-size:13px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#c9a84c;}
+.nav-links{display:flex;align-items:center;gap:28px;}
+.nav-link{color:#888;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:color .2s;}
+.nav-link:hover{color:#c9a84c;}
+.nav-cta{background:#c9a84c;color:#0a0a0a;padding:10px 22px;font-family:"DM Sans",sans-serif;font-weight:700;font-size:13px;text-decoration:none;display:inline-flex;align-items:center;gap:7px;transition:background .2s;}
+.nav-cta:hover{background:#e8c97a;}
 
 /* TICKER */
-.ticker-wrap {
-  overflow:hidden; border-top:1px solid rgba(255,255,255,0.08);
-  border-bottom:1px solid rgba(255,255,255,0.08);
-  padding:13px 0; background:rgba(201,168,76,0.03); padding-top:72px;
-}
-.ticker { display:flex; animation:ticker 30s linear infinite; white-space:nowrap; }
-.ticker-item { font-size:11px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:#c9a84c; padding:0 40px; opacity:0.8; }
-.ticker-sep { color:#888; opacity:0.4; }
-@keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.ticker-wrap{overflow:hidden;border-bottom:1px solid rgba(255,255,255,0.06);padding:12px 0;background:rgba(201,168,76,0.03);padding-top:72px;}
+.ticker{display:flex;animation:ticker 32s linear infinite;white-space:nowrap;}
+.ticker-item{font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#c9a84c;padding:0 40px;opacity:0.7;}
+.ticker-sep{color:#555;opacity:0.5;}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* HERO */
-.hero {
-  min-height:100vh; display:flex; flex-direction:column;
-  align-items:center; justify-content:center;
-  text-align:center; padding:140px 24px 80px; position:relative;
-}
-.hero-bg {
-  position:absolute; inset:0;
-  background:radial-gradient(ellipse 80% 60% at 50% 30%, rgba(201,168,76,0.07) 0%, transparent 70%),
-    linear-gradient(180deg,#0a0a0a 0%,#0d0d0d 100%);
-  z-index:0;
-}
-.hero > * { position:relative; z-index:1; }
-.hero-badge {
-  display:inline-flex; align-items:center; gap:8px; border:1px solid #c9a84c; color:#c9a84c;
-  padding:6px 16px; font-size:10px; font-weight:600; letter-spacing:0.2em;
-  text-transform:uppercase; margin-bottom:28px;
-}
-.hero-icons { display:flex; gap:14px; justify-content:center; margin-bottom:24px; }
-.hero h1 {
-  font-family:'Playfair Display',serif; font-size:clamp(40px,8vw,96px);
-  font-weight:900; line-height:1.02; letter-spacing:-0.02em; margin-bottom:14px; color:#f5f0e8;
-}
-.hero h1 em { font-style:normal; color:#c9a84c; }
-.hero-sub { font-size:clamp(17px,2.5vw,24px); color:#d4cfc6; max-width:600px; margin:0 auto 14px; font-weight:300; line-height:1.5; }
-.hero-promise { font-size:14px; color:#888; margin-bottom:44px; font-style:italic; max-width:520px; line-height:1.6; }
-.hero-promise strong { color:#f5f0e8; font-style:normal; }
-.cta-group { display:flex; flex-direction:column; align-items:center; gap:14px; }
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:140px 24px 80px;position:relative;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 30%,rgba(201,168,76,0.07) 0%,transparent 70%),linear-gradient(180deg,#0a0a0a 0%,#0d0d0d 100%);z-index:0;}
+.hero>*{position:relative;z-index:1;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid #c9a84c;color:#c9a84c;padding:6px 16px;font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:32px;}
+.hero h1{font-family:"Playfair Display",serif;font-size:clamp(42px,8vw,100px);font-weight:900;line-height:1;letter-spacing:-0.03em;margin-bottom:20px;color:#f5f0e8;}
+.hero h1 em{font-style:normal;color:#c9a84c;}
+.hero-sub{font-size:clamp(17px,2.5vw,22px);color:#d4cfc6;max-width:600px;margin:0 auto 48px;font-weight:300;line-height:1.6;}
 
-.btn-primary {
-  background:#c9a84c; color:#0a0a0a; padding:17px 38px;
-  font-family:'DM Sans',sans-serif; font-weight:700; font-size:15px;
-  text-decoration:none; display:inline-flex; align-items:center; gap:9px; transition:all .25s;
+/* PRODUCT CARDS */
+.products-hero{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;max-width:1100px;width:100%;margin:0 auto;position:relative;z-index:1;}
+.product-hero-card{background:#161616;border:1px solid rgba(255,255,255,0.08);padding:40px 32px;display:flex;flex-direction:column;gap:16px;text-decoration:none;transition:border-color .3s,transform .25s;position:relative;overflow:hidden;}
+.product-hero-card::before{content:"";position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#c9a84c,transparent);opacity:0;transition:opacity .3s;}
+.product-hero-card:hover{border-color:rgba(201,168,76,0.5);transform:translateY(-4px);}
+.product-hero-card:hover::before{opacity:1;}
+.product-hero-card.featured{border-color:rgba(201,168,76,0.35);}
+.phc-icon{width:48px;height:48px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2);display:flex;align-items:center;justify-content:center;}
+.phc-label{font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#c9a84c;}
+.phc-title{font-family:"Playfair Display",serif;font-size:24px;font-weight:900;color:#f5f0e8;line-height:1.15;}
+.phc-desc{font-size:13px;color:#888;line-height:1.65;flex:1;}
+.phc-cta{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#c9a84c;margin-top:8px;}
+
+/* ABOUT */
+.about{max-width:1100px;margin:0 auto;padding:96px 48px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.about-label{font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#c9a84c;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.about-label::before{content:"";display:block;width:28px;height:1px;background:#c9a84c;}
+.about h2{font-family:"Playfair Display",serif;font-size:clamp(28px,4vw,48px);font-weight:900;line-height:1.1;letter-spacing:-0.02em;margin-bottom:24px;color:#f5f0e8;}
+.about h2 em{font-style:normal;color:#c9a84c;}
+.about p{color:#d4cfc6;font-size:16px;line-height:1.8;margin-bottom:16px;}
+.about p strong{color:#f5f0e8;}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:8px;}
+.about-stat{background:#161616;border:1px solid rgba(255,255,255,0.08);padding:24px;}
+.about-stat-num{font-family:"Playfair Display",serif;font-size:36px;font-weight:900;color:#c9a84c;}
+.about-stat-label{font-size:11px;color:#888;letter-spacing:0.1em;text-transform:uppercase;margin-top:4px;}
+
+/* PILLARS */
+.pillars{background:#0d0d0d;border-top:1px solid rgba(255,255,255,0.05);padding:80px 48px;}
+.pillars-inner{max-width:1100px;margin:0 auto;}
+.pillars-title{font-family:"Playfair Display",serif;font-size:clamp(26px,4vw,44px);font-weight:900;text-align:center;margin-bottom:48px;color:#f5f0e8;}
+.pillars-title em{font-style:normal;color:#c9a84c;}
+.pillars-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+.pillar{background:#161616;border:1px solid rgba(255,255,255,0.08);padding:32px 24px;}
+.pillar-icon{width:40px;height:40px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+.pillar h3{font-family:"Playfair Display",serif;font-size:18px;font-weight:700;color:#f5f0e8;margin-bottom:8px;}
+.pillar p{font-size:13px;color:#888;line-height:1.6;}
+
+/* FOOTER */
+footer{border-top:1px solid rgba(255,255,255,0.07);padding:40px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.footer-logo{font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#c9a84c;}
+.footer-links{display:flex;gap:24px;}
+.footer-link{font-size:12px;color:#555;text-decoration:none;transition:color .2s;}
+.footer-link:hover{color:#c9a84c;}
+.footer-tagline{font-size:12px;color:#444;}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:13px 20px;}
+  .nav-links{display:none;}
+  .hero{padding:108px 20px 64px;}
+  .products-hero{grid-template-columns:1fr;max-width:420px;}
+  .about{grid-template-columns:1fr;gap:40px;padding:64px 20px;}
+  .pillars{padding:64px 20px;}
+  .pillars-grid{grid-template-columns:1fr 1fr;}
+  footer{flex-direction:column;text-align:center;padding:28px 20px;}
+  .footer-links{justify-content:center;}
 }
-.btn-primary:hover { background:#e8c97a; transform:translateY(-2px); box-shadow:0 12px 40px rgba(201,168,76,0.28); }
-.btn-secondary { color:#d4cfc6; font-size:13px; opacity:0.7; border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:2px; text-decoration:none; }
-
-.hero-proof { margin-top:60px; display:flex; gap:48px; justify-content:center; flex-wrap:wrap; }
-.proof-item { text-align:center; }
-.proof-num { font-family:'Playfair Display',serif; font-size:36px; font-weight:900; color:#c9a84c; display:block; }
-.proof-label { font-size:11px; color:#888; letter-spacing:0.1em; text-transform:uppercase; margin-top:4px; }
-.proof-divider { width:1px; background:rgba(255,255,255,0.08); align-self:stretch; }
-
-section { padding:96px 48px; max-width:1200px; margin:0 auto; }
-.section-label {
-  font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase;
-  color:#c9a84c; margin-bottom:14px; display:flex; align-items:center; gap:10px;
-}
-.section-label::before { content:''; display:block; width:28px; height:1px; background:#c9a84c; }
-h2 { font-family:'Playfair Display',serif; font-size:clamp(30px,4.5vw,54px); font-weight:900; line-height:1.1; letter-spacing:-0.02em; color:#f5f0e8; }
-h2 em { font-style:normal; color:#c9a84c; }
-
-.promise-section {
-  background:#161616; border:1px solid rgba(255,255,255,0.08); border-left:4px solid #c9a84c;
-  max-width:1100px; margin:0 auto; padding:60px 80px; position:relative; overflow:hidden;
-}
-.promise-section blockquote { font-family:'Playfair Display',serif; font-size:clamp(20px,2.8vw,34px); font-weight:700; line-height:1.4; color:#f5f0e8; }
-.promise-section blockquote em { font-style:normal; color:#c9a84c; }
-.promise-section cite { display:block; margin-top:22px; font-size:12px; color:#888; font-style:normal; letter-spacing:0.12em; text-transform:uppercase; }
-
-.what-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; margin-top:56px; }
-.what-text p { color:#d4cfc6; line-height:1.8; font-size:16px; margin-top:20px; }
-.what-text p strong { color:#f5f0e8; }
-.email-mockup { background:#161616; border:1px solid rgba(255,255,255,0.08); padding:30px; position:relative; }
-.email-mockup::before { content:''; position:absolute; top:-1px; left:20px; right:20px; height:3px; background:linear-gradient(90deg,#c9a84c,#e8c97a); }
-.email-header { display:flex; align-items:center; gap:10px; margin-bottom:18px; padding-bottom:18px; border-bottom:1px solid rgba(255,255,255,0.08); }
-.email-dot { width:8px; height:8px; border-radius:50%; }
-.email-from { font-size:12px; color:#888; }
-.email-from strong { color:#c9a84c; display:block; font-size:13px; }
-.email-title-line { font-family:'Playfair Display',serif; font-size:18px; font-weight:700; margin-bottom:10px; display:flex; align-items:center; gap:6px; color:#f5f0e8; }
-.email-body-line { font-size:13px; color:#d4cfc6; line-height:1.7; margin-bottom:18px; }
-.email-tag { display:inline-flex; align-items:center; gap:4px; background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.25); color:#c9a84c; font-size:10px; font-weight:600; padding:3px 8px; margin-right:5px; margin-bottom:5px; }
-.email-time { font-size:11px; color:#888; margin-top:14px; display:flex; align-items:center; gap:5px; }
-
-.benefits-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:44px; }
-.benefit-card { background:#161616; border:1px solid rgba(255,255,255,0.08); padding:36px 28px; position:relative; overflow:hidden; transition:border-color .3s; }
-.benefit-card:hover { border-color:rgba(201,168,76,0.3); }
-.benefit-icon { margin-bottom:18px; display:block; }
-.benefit-card h3 { font-family:'Playfair Display',serif; font-size:20px; font-weight:700; margin-bottom:10px; color:#f5f0e8; }
-.benefit-card h3 em { font-style:normal; color:#c9a84c; }
-.benefit-card p { color:#d4cfc6; font-size:14px; line-height:1.7; }
-.benefit-card p strong { color:#f5f0e8; }
-
-.steps { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:52px; }
-.step { background:#161616; border:1px solid rgba(255,255,255,0.08); padding:36px 24px; }
-.step-num { font-family:'Playfair Display',serif; font-size:56px; font-weight:900; color:rgba(201,168,76,0.1); line-height:1; margin-bottom:14px; display:block; }
-.step-icon { margin-bottom:10px; display:block; }
-.step h3 { font-size:15px; font-weight:700; margin-bottom:7px; color:#f5f0e8; }
-.step p { font-size:13px; color:#d4cfc6; line-height:1.6; }
-
-.products-grid { display:grid; grid-template-columns:2fr 1fr 1fr; gap:2px; margin-top:44px; }
-.product-card-wide { grid-column:2/4; }
-.product-card { background:#161616; border:1px solid rgba(255,255,255,0.08); padding:36px 28px; position:relative; overflow:hidden; transition:border-color .3s; }
-.product-card:hover { border-color:rgba(201,168,76,0.28); }
-.product-card.featured { border-color:rgba(201,168,76,0.4); }
-.product-card.featured::before { content:'PRINCIPAL'; position:absolute; top:18px; right:-28px; background:#c9a84c; color:#0a0a0a; font-size:9px; font-weight:700; letter-spacing:0.14em; padding:4px 38px; transform:rotate(45deg); }
-.product-icon { margin-bottom:18px; display:block; }
-.product-card h3 { font-family:'Playfair Display',serif; font-size:22px; font-weight:700; margin-bottom:9px; line-height:1.2; color:#f5f0e8; }
-.product-card h3 em { font-style:normal; color:#c9a84c; }
-.product-card p { color:#d4cfc6; font-size:13px; line-height:1.7; margin-bottom:20px; }
-.product-link { font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#c9a84c; border-bottom:1px solid rgba(201,168,76,0.3); padding-bottom:2px; text-decoration:none; display:inline-flex; align-items:center; gap:5px; transition:gap .2s; }
-.product-link:hover { gap:9px; }
-.product-mini-badge { display:inline-flex; align-items:center; gap:4px; background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.25); color:#c9a84c; font-size:10px; font-weight:600; padding:3px 8px; text-transform:uppercase; margin-bottom:14px; }
-
-.promo-banner {
-  background:linear-gradient(135deg,rgba(201,168,76,0.1) 0%,rgba(201,168,76,0.03) 100%);
-  border:1px solid rgba(201,168,76,0.32); max-width:1100px; margin:0 auto;
-  padding:52px 72px; display:flex; align-items:center; justify-content:space-between; gap:32px; flex-wrap:wrap;
-}
-.promo-text { flex:1; min-width:260px; }
-.promo-icon { margin-bottom:14px; display:block; }
-.promo-text h3 { font-family:'Playfair Display',serif; font-size:28px; font-weight:900; margin-bottom:9px; color:#f5f0e8; }
-.promo-text h3 em { font-style:normal; color:#c9a84c; }
-.promo-text p { color:#d4cfc6; font-size:14px; line-height:1.6; }
-
-.testimonials-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:44px; }
-.testimonial-wide { grid-column:1/3; }
-.testimonial-card { background:#161616; border:1px solid rgba(255,255,255,0.08); padding:32px 28px; display:flex; flex-direction:column; gap:14px; transition:border-color .3s; }
-.testimonial-card:hover { border-color:rgba(201,168,76,0.22); }
-.testimonial-stars { display:flex; gap:3px; }
-.testimonial-text { color:#d4cfc6; font-size:14px; line-height:1.75; flex:1; font-style:italic; }
-.testimonial-large { font-size:16px; }
-.testimonial-author { display:flex; align-items:center; gap:11px; padding-top:18px; border-top:1px solid rgba(255,255,255,0.08); }
-.testimonial-avatar { width:34px; height:34px; border-radius:50%; background:rgba(201,168,76,0.08); border:1px solid rgba(201,168,76,0.2); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-.testimonial-name { display:block; font-size:13px; font-weight:700; color:#f5f0e8; }
-.testimonial-role { display:block; font-size:11px; color:#888; margin-top:2px; }
-
-.final-cta { text-align:center; padding:120px 24px; position:relative; }
-.final-cta::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 70% 50% at 50% 50%,rgba(201,168,76,0.07) 0%,transparent 70%); z-index:0; }
-.final-cta > * { position:relative; z-index:1; }
-.final-cta .section-label { justify-content:center; }
-.final-cta .section-label::before { display:none; }
-.final-cta h2 { max-width:660px; margin:0 auto 22px; }
-.final-cta > p { color:#d4cfc6; font-size:17px; max-width:480px; margin:0 auto 44px; line-height:1.7; }
-.final-promo-note { margin-top:20px; font-size:12px; color:#c9a84c; display:flex; align-items:center; justify-content:center; gap:7px; }
-
-footer { border-top:1px solid rgba(255,255,255,0.08); padding:44px 48px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px; }
-.footer-logo { font-size:12px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#c9a84c; }
-.footer-tagline { font-size:12px; color:#888; }
-
-
-
-.scroll-hint { display:none; align-items:center; gap:6px; font-size:11px; color:#888; letter-spacing:0.08em; margin-top:10px; opacity:0.6; }
-
-/* TABLET */
-@media (max-width:1024px) {
-  section { padding:80px 32px; }
-  .products-grid { grid-template-columns:1fr 1fr; }
-  .products-grid .product-card.featured { grid-column:1/-1; }
-  .product-card-wide { grid-column:auto; }
-  .steps { grid-template-columns:repeat(2,1fr); }
-  .testimonials-grid { grid-template-columns:1fr 1fr; }
-  .testimonial-wide { grid-column:1/-1; }
-  .promise-section { padding:48px 48px; }
-  .promo-banner { padding:44px 48px; }
-}
-
-/* MOBILE */
-@media (max-width:768px) {
-  .clubs-banner-wrap { padding:0 20px !important; }
-  .clubs-banner-wrap a { width:100%; justify-content:center; }
-  nav { padding:13px 20px; background:rgba(10,10,10,0.98); }
-  .nav-logo { font-size:11px; letter-spacing:0.08em; }
-  .nav-logo-icon { width:28px; height:28px; }
-  .nav-cta { padding:9px 13px; font-size:11px; }
-  .ticker-item { padding:0 24px; font-size:10px; }
-  .hero { padding:108px 20px 56px; min-height:auto; }
-  .hero-badge { font-size:9px; padding:5px 12px; margin-bottom:18px; }
-  .hero h1 { font-size:clamp(34px,10vw,56px); }
-  .hero-sub { font-size:16px; }
-  .hero-promise { font-size:13px; margin-bottom:32px; }
-  .btn-primary { width:100%; justify-content:center; font-size:14px; padding:16px 20px; }
-  .hero-proof { margin-top:36px; gap:0; display:grid; grid-template-columns:1fr 1fr; width:100%; border:1px solid rgba(255,255,255,0.08); }
-  .proof-item { padding:18px 10px; border-right:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08); }
-  .proof-item:nth-child(2n) { border-right:none; }
-  .proof-item:nth-last-child(-n+2) { border-bottom:none; }
-  .proof-divider { display:none; }
-  .proof-num { font-size:26px; }
-  .proof-label { font-size:10px; }
-  .promise-section { padding:30px 24px; margin:0 20px; }
-  section { padding:56px 20px; }
-  .clubs-banner { padding:0 20px !important; }
-  .what-grid { grid-template-columns:1fr; gap:28px; margin-top:32px; }
-  .what-text p { font-size:14px; margin-top:14px; }
-  .what-text .btn-primary { width:100%; justify-content:center; }
-  .email-mockup { padding:22px 18px; }
-  .email-title-line { font-size:15px; }
-  .benefits-grid,.steps,.products-grid,.testimonials-grid {
-    display:flex !important; flex-wrap:nowrap !important; overflow-x:auto;
-    gap:10px; padding:4px 20px 16px; scroll-snap-type:x mandatory;
-    -webkit-overflow-scrolling:touch; scrollbar-width:none; margin-top:28px;
-  }
-  .benefits-grid::-webkit-scrollbar,.steps::-webkit-scrollbar,.products-grid::-webkit-scrollbar,.testimonials-grid::-webkit-scrollbar { display:none; }
-  .benefit-card,.step,.product-card,.testimonial-card { flex:0 0 80vw; max-width:320px; scroll-snap-align:start; padding:26px 22px; }
-  .product-card.featured::before { display:none; }
-  .product-card-wide,.testimonial-wide { grid-column:auto; }
-  .step-num { font-size:40px; }
-  .scroll-hint { display:flex; padding-left:20px; }
-  .promo-banner { flex-direction:column; padding:30px 24px; margin:0 20px; text-align:center; }
-  .promo-banner .btn-primary { width:100%; justify-content:center; }
-  .promo-text { min-width:unset; }
-  .promo-text h3 { font-size:20px; }
-  .final-cta { padding:72px 20px; }
-  .final-cta > p { font-size:15px; }
-  footer { flex-direction:column; text-align:center; padding:28px 20px; gap:14px; }
-}
-@media (max-width:400px) {
-  nav { padding:11px 14px; }
-  .nav-logo-text { display:none; }
-  .nav-cta { padding:8px 11px; font-size:10px; }
-  .hero h1 { font-size:32px; }
-  .benefit-card,.step,.product-card,.testimonial-card { flex:0 0 86vw; }
-}
-/* COMUNIDAD CAROUSEL */
-.comunidad-section {
-  padding:96px 0 80px;
-  overflow:hidden;
-}
-.comunidad-header {
-  max-width:1200px;
-  margin:0 auto;
-  padding:0 48px;
-}
-.carousel-wrapper {
-  overflow:hidden;
-  width:100%;
-  padding:16px 0;
-  cursor:grab;
-  user-select:none;
-}
-.carousel-wrapper:active { cursor:grabbing; }
-.carousel-track {
-  display:flex;
-  gap:16px;
-  width:max-content;
-  animation:scroll-carousel 30s linear infinite;
-}
-.carousel-track:hover { animation-play-state:paused; }
-.carousel-card {
-  flex-shrink:0;
-  width:320px;
-  height:240px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,0.08);
-  position:relative;
-}
-.carousel-card::after {
-  content:'';
-  position:absolute;
-  inset:0;
-  background:linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.4) 100%);
-}
-.carousel-img {
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-  transition:transform .4s ease;
-}
-.carousel-card:hover .carousel-img { transform:scale(1.05); }
-@keyframes scroll-carousel {
-  from { transform:translateX(0); }
-  to { transform:translateX(-50%); }
-}
-@media (max-width:768px) {
-  .comunidad-section { padding:64px 0 56px; }
-  .comunidad-header { padding:0 20px; }
-  .carousel-card { width:260px; height:195px; }
-  .carousel-track { gap:12px; animation-duration:22s; }
+@media(max-width:480px){
+  .products-hero{max-width:100%;padding:0 16px;}
+  .pillars-grid{grid-template-columns:1fr;}
+  .about-stats{grid-template-columns:1fr 1fr;}
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <div class="nav-logo">
-    <!-- LOGO: reemplaza este bloque con <img src="logo.png" style="height:36px;"> -->
-    <div class="nav-logo-icon">
-      <svg width="18" height="18" viewBox="0 0 40 40" fill="none">
-        <path d="M12 28 Q16 12 20 20 Q24 28 28 12" stroke="#c9a84c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      </svg>
-    </div>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.png" alt="San Pablo Academy" onerror="this.style.display='none'">
     <span class="nav-logo-text">San Pablo Academy</span>
+  </a>
+  <div class="nav-links">
+    <a href="clubes.html" class="nav-link">Clubes</a>
+    <a href="newsletter.html" class="nav-link">Newsletter</a>
+    <a href="skillbook.html" class="nav-link">SkillBook</a>
   </div>
-  <a href="https://wa.me/59163509172?text=Hola%2C%20quiero%20suscribirme%20al%20Newsletter%20Consciente" target="_blank" class="nav-cta">
-    <svg class="icon" width="13" height="13" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-    Suscribirme gratis
+  <a href="https://wa.me/59163509172?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20San%20Pablo%20Academy" target="_blank" class="nav-cta">
+    <svg class="icon" width="13" height="13" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.099 1.51 5.822L0 24l6.336-1.498A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.646-.493-5.172-1.355l-.371-.219-3.763.889.938-3.647-.24-.386A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    Contáctanos
   </a>
 </nav>
 
-<!-- TICKER -->
 <div class="ticker-wrap">
   <div class="ticker">
-    <span class="ticker-item">+10 libros al mes</span><span class="ticker-item ticker-sep">✦</span>
-    <span class="ticker-item">1 minuto al día</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">San Pablo Academy</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">Clubes de Lectura</span><span class="ticker-item ticker-sep">✦</span>
     <span class="ticker-item">Newsletter Consciente</span><span class="ticker-item ticker-sep">✦</span>
-    <span class="ticker-item">Sabiduría ultra-rápida</span><span class="ticker-item ticker-sep">✦</span>
-    <span class="ticker-item">Mejora continua</span><span class="ticker-item ticker-sep">✦</span>
-    <span class="ticker-item">San Pablo Café &amp; Librería</span><span class="ticker-item ticker-sep">✦</span>
-    <span class="ticker-item">+10 libros al mes</span><span class="ticker-item ticker-sep">✦</span>
-    <span class="ticker-item">1 minuto al día</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">SkillBook</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">Educación y Lectura Consciente</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">Bolivia</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">San Pablo Academy</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">Clubes de Lectura</span><span class="ticker-item ticker-sep">✦</span>
     <span class="ticker-item">Newsletter Consciente</span><span class="ticker-item ticker-sep">✦</span>
-    <span class="ticker-item">Sabiduría ultra-rápida</span><span class="ticker-item ticker-sep">✦</span>
-    <span class="ticker-item">Mejora continua</span><span class="ticker-item ticker-sep">✦</span>
-    <span class="ticker-item">San Pablo Café &amp; Librería</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">SkillBook</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">Educación y Lectura Consciente</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">Bolivia</span><span class="ticker-item ticker-sep">✦</span>
   </div>
 </div>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero-bg"></div>
   <div class="hero-badge">
-    <svg class="icon icon-gold" width="12" height="12" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-    Newsletter Consciente — San Pablo Academy
+    <svg class="icon icon-gold" width="11" height="11" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+    Ecosistema de educación y lectura consciente
   </div>
-  <div class="hero-icons">
-    <svg class="icon icon-white" width="38" height="38" viewBox="0 0 24 24" style="opacity:.65"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-    <svg class="icon icon-white" width="38" height="38" viewBox="0 0 24 24" style="opacity:.65"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 14H8v-2h8v2zm0-4H8v-2h8v2zm0-4H8V6h8v2z"/></svg>
-  </div>
-  <h1>Ahora puedes leer<br><em>+10 libros al mes</em></h1>
-  <p class="hero-sub">con nuestro <strong style="color:#f5f0e8">Newsletter Consciente</strong></p>
-  <p class="hero-promise">La esencia de un libro completo <strong>cada mañana</strong> — absórbela en solo <strong>1 minuto</strong> mientras tomas tu café.</p>
-  <div class="cta-group">
-    <a href="https://wa.me/59163509172?text=Hola%2C%20quiero%20suscribirme%20al%20Newsletter%20Consciente" target="_blank" class="btn-primary">
-      <svg class="icon" width="17" height="17" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.099 1.51 5.822L0 24l6.336-1.498A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.646-.493-5.172-1.355l-.371-.219-3.763.889.938-3.647-.24-.386A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-      Quiero leer +10 libros al mes →
-    </a>
-    <span style="font-size:11px;color:#888">✦ Al final se esconde una promo 🤫 ✦</span>
-    <a href="#que-es" class="btn-secondary">¿Cómo funciona? ↓</a>
-  </div>
-  <div class="hero-proof">
-    <div class="proof-item"><span class="proof-num">+10</span><span class="proof-label">Libros al mes</span></div>
-    <div class="proof-divider"></div>
-    <div class="proof-item"><span class="proof-num">1'</span><span class="proof-label">Minuto al día</span></div>
-    <div class="proof-divider"></div>
-    <div class="proof-item"><span class="proof-num">∞</span><span class="proof-label">Conocimiento</span></div>
-    <div class="proof-divider"></div>
-    <div class="proof-item"><span class="proof-num">0$</span><span class="proof-label">Costo entrada</span></div>
-  </div>
-</div>
+  <h1>San Pablo<br><em>Academy</em></h1>
+  <p class="hero-sub">Transformamos la lectura en acción. Clubes, newsletter y guías prácticas para que crezcas un 1% cada día.</p>
 
-<!-- PROMISE -->
-<div class="promise-section">
-  <blockquote>"La excusa del <em>'no tengo tiempo'</em> se acabó. Te traemos la esencia de un libro completo cada mañana, resumida para que la absorbas en solo <em>1 MINUTO</em>."</blockquote>
-  <cite>— Newsletter Consciente · San Pablo Academy</cite>
-</div>
-
-<!-- QUE ES -->
-<section id="que-es">
-  <div class="section-label">El producto</div>
-  <h2>¿Qué es el<br><em>Newsletter Consciente?</em></h2>
-  <div class="what-grid">
-    <div class="what-text">
-      <p>El Newsletter Consciente de San Pablo es un <strong>espacio de entrenamiento diario</strong> donde la lectura se transforma en ejecución.</p>
-      <p>Cada mañana recibirás un correo con el <strong>resumen de la idea central de un libro</strong>, acompañado de herramientas prácticas para que pases de la teoría a la acción y logres una <strong>mejora continua en tu vida, paso a paso.</strong></p>
-      <p>Es como tener el superpoder de <strong>leer 15 libros al mes</strong> mientras te tomas el café.</p>
-      <br>
-      <a href="https://wa.me/59163509172?text=Hola%2C%20quiero%20suscribirme%20al%20Newsletter%20Consciente" target="_blank" class="btn-primary" style="display:inline-flex;font-size:13px;padding:13px 24px;">
-        <svg class="icon" width="14" height="14" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        Quiero suscribirme →
-      </a>
-    </div>
-    <div >
-      <div class="email-mockup">
-        <div class="email-header">
-          <div>
-            <div class="email-dot" style="background:#c0392b;display:inline-block;"></div>
-            <div class="email-dot" style="background:#e67e22;display:inline-block;margin-left:4px;"></div>
-            <div class="email-dot" style="background:#27ae60;display:inline-block;margin-left:4px;"></div>
-          </div>
-          <div class="email-from"><strong>San Pablo Academy</strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d7b9b2a0a4bbb2a3a3b2a597a4b6b9a7b6b5bbb8f9b4b8ba">[email&#160;protected]</a></div>
-        </div>
-        <div class="email-title-line">
-          <svg class="icon icon-gold" width="14" height="14" viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 14H8v-2h8v2zm0-4H8v-2h8v2zm0-4H8V6h8v2z"/></svg>
-          Hoy: "Atomic Habits" — La idea que lo cambia todo
-        </div>
-        <div class="email-body-line">Un 1% mejor cada día durante 365 días = <strong>37 veces mejor.</strong> El cambio viene de sistemas, no de grandes gestos. Hoy aplicarás esto en 3 pasos…</div>
-        <div>
-          <span class="email-tag"><svg class="icon" width="9" height="9" viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg> Acción de hoy</span>
-          <span class="email-tag"><svg class="icon" width="9" height="9" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg> Idea central</span>
-          <span class="email-tag"><svg class="icon" width="9" height="9" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg> Herramienta</span>
-        </div>
-        <div class="email-time">
-          <svg class="icon icon-gold" width="11" height="11" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
-          Tiempo de lectura: <strong style="color:#c9a84c">1 minuto</strong>
-        </div>
+  <div class="products-hero">
+    <a href="clubes.html" class="product-hero-card featured">
+      <div class="phc-icon">
+        <svg class="icon icon-gold" width="22" height="22" viewBox="0 0 24 24"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/></svg>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- BENEFITS -->
-<section>
-  <div class="section-label">Por qué suscribirte</div>
-  <h2>Más lectura.<br><em>Más resultados.</em></h2>
-  <div class="benefits-grid">
-    <div class="benefit-card">
-      <span class="benefit-icon"><svg class="icon icon-gold" width="34" height="34" viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg></span>
-      <h3>Sabiduría <em>Ultra-Rápida</em></h3>
-      <p>Lee la esencia de <strong>15 libros al mes</strong> invirtiendo solo 1 minuto al día. Sin pretextos, sin excusas.</p>
-    </div>
-    <div class="benefit-card">
-      <span class="benefit-icon"><svg class="icon icon-gold" width="34" height="34" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg></span>
-      <h3>Acción <em>Inmediata</em></h3>
-      <p>Recibes herramientas prácticas para <strong>aplicar el conocimiento de forma tangible hoy mismo</strong>, no algún día.</p>
-    </div>
-    <div class="benefit-card">
-      <span class="benefit-icon"><svg class="icon icon-gold" width="34" height="34" viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg></span>
-      <h3>Mejora <em>Continua</em></h3>
-      <p>Instalas el hábito de crecer un <strong>1% cada mañana</strong> con dosis diarias de valor estratégico.</p>
-    </div>
-  </div>
-  <div class="scroll-hint"><svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Desliza para ver más</div>
-  <div style="text-align:center;margin-top:44px;">
-    <a href="https://wa.me/59163509172?text=Hola%2C%20quiero%20suscribirme%20al%20Newsletter%20Consciente" target="_blank" class="btn-primary">
-      <svg class="icon" width="16" height="16" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.099 1.51 5.822L0 24l6.336-1.498A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.646-.493-5.172-1.355l-.371-.219-3.763.889.938-3.647-.24-.386A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-      Sí, quiero formar parte →
+      <div class="phc-label">Comunidad</div>
+      <div class="phc-title">Clubes de Lectura</div>
+      <div class="phc-desc">Lee en comunidad guiado por mentores expertos. Cada mes un libro diferente, sesiones en vivo y espacio de debate.</div>
+      <div class="phc-cta">Ver clubes <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></div>
     </a>
-  </div>
-</section>
-
-<!-- STEPS -->
-<section>
-  <div class="section-label">Así de simple</div>
-  <h2>Cómo funciona</h2>
-  <div class="steps">
-    <div class="step">
-      <span class="step-num">01</span>
-      <span class="step-icon"><svg class="icon icon-gold" width="26" height="26" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.099 1.51 5.822L0 24l6.336-1.498A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.646-.493-5.172-1.355l-.371-.219-3.763.889.938-3.647-.24-.386A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg></span>
-      <h3>Te suscribes</h3><p>Un mensaje a WhatsApp y listo. Sin formularios complicados.</p>
-    </div>
-    <div class="step">
-      <span class="step-num">02</span>
-      <span class="step-icon"><svg class="icon icon-gold" width="26" height="26" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></span>
-      <h3>Cada mañana</h3><p>Recibes un email con la idea central de un libro distinto.</p>
-    </div>
-    <div class="step">
-      <span class="step-num">03</span>
-      <span class="step-icon"><svg class="icon icon-gold" width="26" height="26" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg></span>
-      <h3>1 minuto</h3><p>Absorbes el conocimiento mientras tomas tu café.</p>
-    </div>
-    <div class="step">
-      <span class="step-num">04</span>
-      <span class="step-icon"><svg class="icon icon-gold" width="26" height="26" viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg></span>
-      <h3>Ejecutas</h3><p>Aplicas la herramienta práctica del día y creces 1% cada jornada.</p>
-    </div>
-  </div>
-  <div class="scroll-hint"><svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Desliza para ver más</div>
-</section>
-
-<!-- CLUBES BANNER -->
-<div class="clubs-banner-wrap" style="max-width:1100px;margin:0 auto;padding:0 48px 0;">
-  <div style="background:linear-gradient(135deg,rgba(201,168,76,0.1),rgba(201,168,76,0.03));border:1px solid rgba(201,168,76,0.35);padding:40px 48px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
-    <div>
-      <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#c9a84c;margin-bottom:10px;">📚 Disponibles este mes</div>
-      <div style="font-family:'Playfair Display',serif;font-size:clamp(20px,3vw,30px);font-weight:900;color:#f5f0e8;margin-bottom:8px;">Únete a nuestros <span style="color:#c9a84c">Clubes de Lectura</span></div>
-      <p style="color:#d4cfc6;font-size:14px;line-height:1.6;max-width:480px;">Lee en comunidad guiado por mentores expertos. +8 clubes este mes con diferentes libros y temáticas.</p>
-    </div>
-    <a href="clubes.html" style="flex-shrink:0;background:#c9a84c;color:#0a0a0a;padding:15px 28px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:14px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;">
-      Ver catálogo →
+    <a href="newsletter.html" class="product-hero-card">
+      <div class="phc-icon">
+        <svg class="icon icon-gold" width="22" height="22" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      </div>
+      <div class="phc-label">Diario</div>
+      <div class="phc-title">Newsletter Consciente</div>
+      <div class="phc-desc">La esencia de un libro completo cada mañana. 1 minuto al día para absorber +10 libros al mes directo en tu correo.</div>
+      <div class="phc-cta">Suscribirme <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></div>
+    </a>
+    <a href="skillbook.html" class="product-hero-card">
+      <div class="phc-icon">
+        <svg class="icon icon-gold" width="22" height="22" viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg>
+      </div>
+      <div class="phc-label">Guías prácticas</div>
+      <div class="phc-title">SkillBook</div>
+      <div class="phc-desc">Libros recomendados con guía de aplicación práctica. Aprende una habilidad concreta con cada libro seleccionado por nuestros mentores.</div>
+      <div class="phc-cta">Explorar <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></div>
     </a>
   </div>
 </div>
 
-<!-- PRODUCTS -->
-<section>
-  <div class="section-label">Ecosistema San Pablo</div>
-  <h2>Todos nuestros <em>productos</em></h2>
-  <div class="products-grid">
-    <div class="product-card featured">
-      <span class="product-mini-badge"><svg class="icon" width="9" height="9" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> Producto principal</span>
-      <span class="product-icon"><svg class="icon icon-gold" width="40" height="40" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></span>
-      <h3>Newsletter <em>Consciente</em></h3>
-      <p>La esencia de +10 libros al mes directo en tu correo. 1 minuto al día para transformar tu conocimiento en acción.</p>
-      <a href="https://wa.me/59163509172?text=Hola%2C%20quiero%20suscribirme%20al%20Newsletter%20Consciente" target="_blank" class="product-link">Suscribirme ahora →</a>
-    </div>
-    <div class="product-card" style="border-color:rgba(201,168,76,0.25);">
-      <span class="product-icon"><svg class="icon icon-gold" width="40" height="40" viewBox="0 0 24 24"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/></svg></span>
-      <h3>Clubes de <em>Lectura</em></h3>
-      <p>Lee en comunidad. Comparte perspectivas y conviértete en parte de una tribu lectora única. +8 clubes activos este mes.</p>
-      <a href="clubes.html" class="product-link" style="font-size:12px;color:#c9a84c;border-bottom-color:rgba(201,168,76,0.5);">Ver catálogo de clubes →</a>
-    </div>
-    <div class="product-card">
-      <span class="product-icon"><svg class="icon icon-gold" width="40" height="40" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg></span>
-      <h3>Skill <em>Books</em></h3>
-      <p>Libros para desarrollar habilidades concretas aplicables de forma inmediata en tu vida profesional.</p>
-      <a href="https://wa.me/59163509172?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20Skill%20Books" target="_blank" class="product-link">Explorar →</a>
-    </div>
-    <div class="product-card product-card-wide">
-      <span class="product-icon"><svg class="icon icon-gold" width="40" height="40" viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg></span>
-      <h3>Talleres <em>San Pablo</em></h3>
-      <p>Formaciones intensivas donde el conocimiento se convierte en ejecución real. Aprende y rodéate de personas que también quieren crecer.</p>
-      <a href="https://wa.me/59163509172?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20los%20talleres" target="_blank" class="product-link">Ver próximos talleres →</a>
-    </div>
+<!-- ABOUT -->
+<div class="about">
+  <div>
+    <div class="about-label">Quiénes somos</div>
+    <h2>Un ecosistema para <em>crecer leyendo</em></h2>
+    <p>San Pablo Academy nació de <strong>San Pablo Café &amp; Librería</strong> con una misión clara: transformar la lectura en una herramienta de crecimiento real y cotidiano.</p>
+    <p>No somos solo una librería. Somos un ecosistema donde la lectura consciente se convierte en hábitos, habilidades y comunidad. Cada producto está diseñado para que el conocimiento de los libros pase de la teoría a tu vida diaria.</p>
+    <p>Desde <strong>Bolivia</strong> para el mundo.</p>
   </div>
-  <div class="scroll-hint"><svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Desliza para ver más</div>
-</section>
-
-<!-- PROMO BANNER -->
-<div class="promo-banner">
-  <div class="promo-text">
-    <span class="promo-icon"><svg class="icon icon-gold" width="44" height="44" viewBox="0 0 24 24"><path d="M12 1C8.676 1 6 3.676 6 7c0 2.429 1.376 4.54 3.4 5.635L9 20h6l-.4-7.365C16.624 11.54 18 9.429 18 7c0-3.324-2.676-6-6-6zm0 2c2.206 0 4 1.794 4 4 0 1.858-1.279 3.411-3 3.858V8h-2v2.858C9.279 10.411 8 8.858 8 7c0-2.206 1.794-4 4-4z"/></svg></span>
-    <h3>Y recuerda… <em>al final se esconde una promo</em></h3>
-    <p>Cada edición incluye una sorpresa exclusiva para los suscriptores más atentos. Solo los que leen hasta el final la descubren.</p>
-  </div>
-  <a href="https://wa.me/59163509172?text=Hola%2C%20quiero%20suscribirme%20al%20Newsletter%20Consciente%20y%20encontrar%20la%20promo" target="_blank" class="btn-primary" style="white-space:nowrap;flex-shrink:0;">
-    <svg class="icon" width="15" height="15" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-    Quiero la promo →
-  </a>
-</div>
-
-<!-- COMUNIDAD CARRUSEL -->
-<div class="comunidad-section">
-  <div class="comunidad-header">
-    <div class="section-label" style="justify-content:center;"><span style="display:block;width:28px;height:1px;background:#c9a84c;"></span>Nuestra comunidad</div>
-    <h2 style="text-align:center;margin-bottom:8px;">Únete a nuestra <em>comunidad</em></h2>
-    <p style="text-align:center;color:#d4cfc6;font-size:15px;max-width:500px;margin:0 auto 40px;line-height:1.6;">Cientos de lectores creciendo juntos cada mes en nuestros clubes.</p>
-  </div>
-  <div class="carousel-wrapper">
-    <div class="carousel-track" id="carouselTrack">
-      <!-- Las fotos se agregan aquí. Ejemplo de cómo se ve cada tarjeta: -->
-      <div class="carousel-card">
-        <img src="foto1.jpeg" alt="Club de Lectura San Pablo" class="carousel-img">
-      </div>
-      <div class="carousel-card">
-        <img src="foto2.jpeg" alt="Club de Lectura San Pablo" class="carousel-img">
-      </div>
-      <div class="carousel-card">
-        <img src="foto3.jpeg" alt="Club de Lectura San Pablo" class="carousel-img">
-      </div>
-      <div class="carousel-card">
-        <img src="foto4.jpeg" alt="Club de Lectura San Pablo" class="carousel-img">
-      </div>
-      <div class="carousel-card">
-        <img src="foto5.jpeg" alt="Club de Lectura San Pablo" class="carousel-img">
-      </div>
-      <div class="carousel-card">
-        <img src="foto6.jpeg" alt="Club de Lectura San Pablo" class="carousel-img">
-      </div>
-      <!-- Duplicados para loop infinito -->
-      <div class="carousel-card">
-        <img src="foto1.jpeg" alt="Club de Lectura San Pablo" class="carousel-img">
-      </div>
-      <div class="carousel-card">
-        <img src="foto2.jpeg" alt="Club de Lectura San Pablo" class="carousel-img">
-      </div>
-      <div class="carousel-card">
-        <img src="foto3.jpeg" alt="Club de Lectura San Pablo" class="carousel-img">
-      </div>
-      <div class="carousel-card">
-        <img src="foto4.jpeg" alt="Club de Lectura San Pablo" class="carousel-img">
-      </div>
-      <div class="carousel-card">
-        <img src="foto5.jpeg" alt="Club de Lectura San Pablo" class="carousel-img">
-      </div>
-      <div class="carousel-card">
-        <img src="foto6.jpeg" alt="Club de Lectura San Pablo" class="carousel-img">
-      </div>
+  <div class="about-stats">
+    <div class="about-stat">
+      <div class="about-stat-num">+10</div>
+      <div class="about-stat-label">Libros al mes</div>
     </div>
-  </div>
-  <div style="text-align:center;margin-top:40px;">
-    <a href="clubes.html" style="background:#c9a84c;color:#0a0a0a;padding:15px 32px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:14px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/></svg>
-      Quiero unirme →
-    </a>
-  </div>
-</div>
-
-<!-- TESTIMONIALS -->
-<section>
-  <div class="section-label">Lo que dicen los lectores</div>
-  <h2>Voces de nuestra <em>comunidad</em></h2>
-  <div class="testimonials-grid">
-    <div class="testimonial-card testimonial-wide">
-      <div class="testimonial-stars">
-        <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-      </div>
-      <p class="testimonial-text testimonial-large">"San Pablo Academy cambió mi relación con los libros. Antes los compraba y no los terminaba. Ahora recibo la esencia cada mañana y eso me da el impulso para ir a leer el libro completo. Es un círculo virtuoso increíble."</p>
-      <div class="testimonial-author">
-        <div class="testimonial-avatar"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" style="color:rgba(201,168,76,0.5)"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
-        <div><span class="testimonial-name">Rodrigo M.</span><span class="testimonial-role">Consultor de Negocios · La Paz</span></div>
-      </div>
+    <div class="about-stat">
+      <div class="about-stat-num">8+</div>
+      <div class="about-stat-label">Clubes activos</div>
     </div>
-    <div class="testimonial-card">
-      <div class="testimonial-stars">
-        <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-      </div>
-      <p class="testimonial-text">"La promo del final me atrapó desde el primer correo. Pero lo que me hizo quedarme fue la calidad del contenido. Cada día aprendo algo nuevo."</p>
-      <div class="testimonial-author">
-        <div class="testimonial-avatar"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" style="color:rgba(201,168,76,0.5)"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
-        <div><span class="testimonial-name">Sofía A.</span><span class="testimonial-role">Estudiante de Posgrado · Sucre</span></div>
-      </div>
+    <div class="about-stat">
+      <div class="about-stat-num">1'</div>
+      <div class="about-stat-label">Minuto al día</div>
     </div>
-    <div class="testimonial-card">
-      <div class="testimonial-stars">
-        <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-      </div>
-      <p class="testimonial-text">"Nunca creí que en 1 minuto podía absorber algo tan valioso. Cada mañana llego a mi trabajo con una idea que aplicar. Es el hábito que más ha cambiado mi año."</p>
-      <div class="testimonial-author">
-        <div class="testimonial-avatar"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" style="color:rgba(201,168,76,0.5)"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
-        <div><span class="testimonial-name">Daniela R.</span><span class="testimonial-role">Emprendedora · La Paz</span></div>
-      </div>
-    </div>
-    <div class="testimonial-card">
-      <div class="testimonial-stars">
-        <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-      </div>
-      <p class="testimonial-text">"Llevaba años queriendo leer más pero el tiempo siempre era el pretexto. El Newsletter Consciente me demostró que el problema era no tener el sistema correcto."</p>
-      <div class="testimonial-author">
-        <div class="testimonial-avatar"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" style="color:rgba(201,168,76,0.5)"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
-        <div><span class="testimonial-name">Marcos T.</span><span class="testimonial-role">Gerente de Proyectos · Santa Cruz</span></div>
-      </div>
-    </div>
-    <div class="testimonial-card">
-      <div class="testimonial-stars">
-        <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-      </div>
-      <p class="testimonial-text">"Lo que más me sorprende es la herramienta práctica de cada día. No es teoría vacía, es conocimiento que puedo aplicar inmediatamente."</p>
-      <div class="testimonial-author">
-        <div class="testimonial-avatar"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" style="color:rgba(201,168,76,0.5)"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
-        <div><span class="testimonial-name">Valeria C.</span><span class="testimonial-role">Diseñadora · Cochabamba</span></div>
-      </div>
-    </div>
-  </div>
-  <div class="scroll-hint"><svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Desliza para ver más</div>
-</section>
-
-<!-- FINAL CTA -->
-<div class="final-cta">
-  <div class="section-label">Únete ahora</div>
-  <h2>La excusa del <em>"no tengo tiempo"</em><br>se acabó.</h2>
-  <p>1 minuto al día. +10 libros al mes. Resultados reales. ¿Qué estás esperando?</p>
-  <div class="cta-group">
-    <a href="https://wa.me/59163509172?text=Hola%2C%20quiero%20suscribirme%20al%20Newsletter%20Consciente" target="_blank" class="btn-primary" style="font-size:17px;padding:19px 44px;">
-      <svg class="icon" width="19" height="19" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.099 1.51 5.822L0 24l6.336-1.498A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.646-.493-5.172-1.355l-.371-.219-3.763.889.938-3.647-.24-.386A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-      Quiero leer +10 libros al mes →
-    </a>
-    <div class="final-promo-note">
-      <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M12 1C8.676 1 6 3.676 6 7c0 2.429 1.376 4.54 3.4 5.635L9 20h6l-.4-7.365C16.624 11.54 18 9.429 18 7c0-3.324-2.676-6-6-6z"/></svg>
-      Psst… no olvides leer hasta el final para encontrar la promo
+    <div class="about-stat">
+      <div class="about-stat-num">∞</div>
+      <div class="about-stat-label">Crecimiento</div>
     </div>
   </div>
 </div>
 
-<!-- FOOTER -->
+<!-- PILLARS -->
+<div class="pillars">
+  <div class="pillars-inner">
+    <div class="pillars-title">Nuestra <em>filosofía</em></div>
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="pillar-icon"><svg class="icon icon-gold" width="20" height="20" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg></div>
+        <h3>Lectura activa</h3>
+        <p>No leemos para saber. Leemos para hacer. Cada libro debe transformarse en una acción concreta.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon"><svg class="icon icon-gold" width="20" height="20" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
+        <h3>Comunidad</h3>
+        <p>Crecer solos es posible. Crecer acompañados es exponencial. La comunidad multiplica el aprendizaje.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon"><svg class="icon icon-gold" width="20" height="20" viewBox="0 0 24 24"><path d="M13 2.05v2.02c3.95.49 7 3.85 7 7.93 0 3.21-1.81 6.01-4.5 7.5L13 17v5h5l-1.22-1.22C19.91 19.07 22 15.76 22 12c0-5.18-3.95-9.45-9-9.95zM11 2.05C5.95 2.55 2 6.82 2 12c0 3.76 2.09 7.07 5.22 8.78L6 22h5v-5l-2.5 2.45C6.81 18.01 5 15.21 5 12c0-4.08 3.05-7.44 7-7.93V2.05z"/></svg></div>
+        <h3>Consistencia</h3>
+        <p>Un 1% mejor cada día. Los grandes cambios vienen de pequeñas acciones repetidas con intención.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon"><svg class="icon icon-gold" width="20" height="20" viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg></div>
+        <h3>Aplicación práctica</h3>
+        <p>El conocimiento sin aplicación es entretenimiento. Todo lo que enseñamos tiene un "¿cómo lo aplico hoy?"</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <footer>
-  <div class="footer-logo">✦ San Pablo Academy — Café &amp; Librería</div>
-  <div class="footer-tagline">Donde la lectura se transforma en ejecución.</div>
-  <a href="https://wa.me/59163509172" target="_blank" style="color:#c9a84c;text-decoration:none;font-size:12px;display:inline-flex;align-items:center;gap:5px;">
-    <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.099 1.51 5.822L0 24l6.336-1.498A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.646-.493-5.172-1.355l-.371-.219-3.763.889.938-3.647-.24-.386A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-    +591 63509172
-  </a>
+  <div class="footer-logo">✦ San Pablo Academy</div>
+  <div class="footer-links">
+    <a href="clubes.html" class="footer-link">Clubes</a>
+    <a href="newsletter.html" class="footer-link">Newsletter</a>
+    <a href="skillbook.html" class="footer-link">SkillBook</a>
+    <a href="admin.html" class="footer-link">Admin</a>
+  </div>
+  <div class="footer-tagline">Educación y lectura consciente · Bolivia</div>
 </footer>
+
 </body>
 </html>

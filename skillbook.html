@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkillBook – San Pablo Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:ital,wght@0,300;0,400;0,600;0,700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0a0a0a;--card:#161616;--border:rgba(255,255,255,0.08);--white:#f5f0e8;--gold:#c9a84c;--gold-light:#e8c97a;--gray:#888;--text:#d4cfc6;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{background:#0a0a0a;color:#f5f0e8;font-family:"DM Sans",sans-serif;overflow-x:hidden;}
+.icon{display:inline-block;vertical-align:middle;fill:currentColor;flex-shrink:0;}
+.icon-gold{color:#c9a84c;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(10,10,10,0.97),transparent);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo img{height:36px;width:auto;}
+.nav-logo-text{font-size:13px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#c9a84c;}
+.nav-back{color:#888;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:color .2s;}
+.nav-back:hover{color:#c9a84c;}
+.nav-cta{background:#c9a84c;color:#0a0a0a;padding:10px 22px;font-family:"DM Sans",sans-serif;font-weight:700;font-size:13px;text-decoration:none;display:inline-flex;align-items:center;gap:7px;transition:background .2s;}
+.nav-cta:hover{background:#e8c97a;}
+
+.ticker-wrap{overflow:hidden;border-bottom:1px solid rgba(255,255,255,0.06);padding:12px 0;background:rgba(201,168,76,0.03);padding-top:72px;}
+.ticker{display:flex;animation:ticker 30s linear infinite;white-space:nowrap;}
+.ticker-item{font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#c9a84c;padding:0 40px;opacity:0.8;}
+.ticker-sep{color:#555;opacity:0.4;}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:140px 24px 80px;position:relative;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 30%,rgba(201,168,76,0.07) 0%,transparent 70%),linear-gradient(180deg,#0a0a0a 0%,#0d0d0d 100%);z-index:0;}
+.hero>*{position:relative;z-index:1;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid #c9a84c;color:#c9a84c;padding:6px 16px;font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:28px;}
+.hero h1{font-family:"Playfair Display",serif;font-size:clamp(44px,8vw,96px);font-weight:900;line-height:1;letter-spacing:-0.02em;margin-bottom:14px;color:#f5f0e8;}
+.hero h1 em{font-style:normal;color:#c9a84c;}
+.hero-sub{font-size:clamp(17px,2.5vw,24px);color:#d4cfc6;max-width:640px;margin:0 auto 44px;font-weight:300;line-height:1.6;}
+.btn-primary{background:#c9a84c;color:#0a0a0a;padding:17px 38px;font-family:"DM Sans",sans-serif;font-weight:700;font-size:15px;text-decoration:none;display:inline-flex;align-items:center;gap:9px;transition:all .25s;}
+.btn-primary:hover{background:#e8c97a;transform:translateY(-2px);}
+
+/* HOW IT WORKS */
+.how-section{max-width:1100px;margin:0 auto;padding:96px 48px;}
+.section-label{font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#c9a84c;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.section-label::before{content:"";display:block;width:28px;height:1px;background:#c9a84c;}
+h2{font-family:"Playfair Display",serif;font-size:clamp(28px,4vw,52px);font-weight:900;line-height:1.1;letter-spacing:-0.02em;color:#f5f0e8;}
+h2 em{font-style:normal;color:#c9a84c;}
+.how-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-top:56px;}
+.how-text p{color:#d4cfc6;font-size:16px;line-height:1.8;margin-top:18px;}
+.how-text p strong{color:#f5f0e8;}
+.how-visual{background:#161616;border:1px solid rgba(255,255,255,0.08);padding:36px;position:relative;}
+.how-visual::before{content:"";position:absolute;top:-1px;left:20px;right:20px;height:3px;background:linear-gradient(90deg,#c9a84c,#e8c97a);}
+.how-book{display:flex;gap:20px;align-items:flex-start;padding:20px 0;border-bottom:1px solid rgba(255,255,255,0.06);}
+.how-book:last-child{border-bottom:none;padding-bottom:0;}
+.how-book-cover{width:52px;height:72px;background:linear-gradient(135deg,#1e1e1e,#2a2a2a);border:1px solid rgba(201,168,76,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.how-book-info{flex:1;}
+.how-book-title{font-family:"Playfair Display",serif;font-size:15px;font-weight:700;color:#f5f0e8;margin-bottom:4px;}
+.how-book-author{font-size:11px;color:#888;font-style:italic;margin-bottom:8px;}
+.how-book-skill{display:inline-flex;align-items:center;gap:5px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);color:#c9a84c;font-size:10px;font-weight:600;padding:3px 8px;letter-spacing:0.08em;text-transform:uppercase;}
+
+/* WHAT YOU GET */
+.features-section{background:#0d0d0d;border-top:1px solid rgba(255,255,255,0.05);padding:80px 48px;}
+.features-inner{max-width:1100px;margin:0 auto;}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:48px;}
+.feature-card{background:#161616;border:1px solid rgba(255,255,255,0.08);padding:36px 28px;transition:border-color .3s;}
+.feature-card:hover{border-color:rgba(201,168,76,0.3);}
+.feature-icon{width:44px;height:44px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+.feature-card h3{font-family:"Playfair Display",serif;font-size:19px;font-weight:700;color:#f5f0e8;margin-bottom:10px;}
+.feature-card p{color:#888;font-size:13px;line-height:1.7;}
+
+/* SKILLS */
+.skills-section{max-width:1100px;margin:0 auto;padding:96px 48px;}
+.skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:44px;}
+.skill-card{background:#161616;border:1px solid rgba(255,255,255,0.08);padding:28px 24px;text-align:center;transition:border-color .3s;}
+.skill-card:hover{border-color:rgba(201,168,76,0.3);}
+.skill-emoji{font-size:28px;display:block;margin-bottom:12px;}
+.skill-name{font-family:"Playfair Display",serif;font-size:16px;font-weight:700;color:#f5f0e8;margin-bottom:6px;}
+.skill-desc{font-size:12px;color:#888;line-height:1.5;}
+
+/* CTA FINAL */
+.final-cta{text-align:center;padding:100px 24px;position:relative;}
+.final-cta::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 50%,rgba(201,168,76,0.07) 0%,transparent 70%);z-index:0;}
+.final-cta>*{position:relative;z-index:1;}
+.final-cta h2{max-width:600px;margin:0 auto 20px;}
+.final-cta>p{color:#d4cfc6;font-size:17px;max-width:480px;margin:0 auto 40px;line-height:1.7;}
+
+footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.footer-logo{font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#c9a84c;}
+.footer-tagline{font-size:12px;color:#888;}
+
+@media(max-width:900px){
+  nav{padding:13px 20px;}
+  .how-section,.skills-section{padding:64px 20px;}
+  .features-section{padding:64px 20px;}
+  .how-grid{grid-template-columns:1fr;gap:32px;margin-top:32px;}
+  .features-grid{grid-template-columns:1fr;}
+  .skills-grid{grid-template-columns:1fr 1fr;}
+  footer{flex-direction:column;text-align:center;padding:28px 20px;}
+}
+@media(max-width:480px){
+  nav{padding:11px 14px;}
+  .nav-logo-text{display:none;}
+  .hero{padding:108px 16px 56px;min-height:auto;}
+  .hero h1{font-size:36px;}
+  .skills-grid{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.png" alt="" onerror="this.style.display='none'">
+    <span class="nav-logo-text">San Pablo Academy</span>
+  </a>
+  <a href="index.html" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+    Inicio
+  </a>
+  <a href="https://wa.me/59163509172?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20SkillBook" target="_blank" class="nav-cta">
+    <svg class="icon" width="13" height="13" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.099 1.51 5.822L0 24l6.336-1.498A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.646-.493-5.172-1.355l-.371-.219-3.763.889.938-3.647-.24-.386A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    Quiero mi SkillBook
+  </a>
+</nav>
+
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-item">SkillBook</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">Libros con guía práctica</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">Aprende una habilidad por libro</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">De la teoría a la acción</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">San Pablo Academy</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">SkillBook</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">Libros con guía práctica</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">Aprende una habilidad por libro</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">De la teoría a la acción</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">San Pablo Academy</span><span class="ticker-item ticker-sep">✦</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-badge">
+    <svg class="icon icon-gold" width="12" height="12" viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg>
+    Guías prácticas — San Pablo Academy
+  </div>
+  <h1>Skill<em>Book</em></h1>
+  <p class="hero-sub">Cada libro recomendado viene con una guía de aplicación práctica. No solo lees — aprendes una habilidad concreta que puedes usar desde hoy.</p>
+  <a href="https://wa.me/59163509172?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20SkillBook" target="_blank" class="btn-primary">
+    <svg class="icon" width="17" height="17" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.099 1.51 5.822L0 24l6.336-1.498A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.646-.493-5.172-1.355l-.371-.219-3.763.889.938-3.647-.24-.386A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    Quiero mi SkillBook →
+  </a>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="how-section">
+  <div class="section-label">Cómo funciona</div>
+  <h2>Un libro,<br><em>una habilidad.</em></h2>
+  <div class="how-grid">
+    <div class="how-text">
+      <p>Cada <strong>SkillBook</strong> es un libro seleccionado por nuestros mentores, acompañado de una guía práctica exclusiva diseñada para que desarrolles una habilidad concreta.</p>
+      <p>No es solo leer. Es <strong>leer con intención y con un plan de aplicación</strong>. Al terminar cada SkillBook tendrás una habilidad nueva instalada en tu vida.</p>
+      <p>Nuestros mentores eligen los libros, diseñan los ejercicios y te acompañan en el proceso para que el conocimiento no se quede en el papel.</p>
+      <br>
+      <a href="https://wa.me/59163509172?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20SkillBook" target="_blank" class="btn-primary" style="display:inline-flex;font-size:13px;padding:13px 24px;">
+        Pedir información →
+      </a>
+    </div>
+    <div class="how-visual">
+      <div class="how-book">
+        <div class="how-book-cover"><svg class="icon icon-gold" width="18" height="18" viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 14H8v-2h8v2zm0-4H8v-2h8v2zm0-4H8V6h8v2z"/></svg></div>
+        <div class="how-book-info">
+          <div class="how-book-title">Atomic Habits</div>
+          <div class="how-book-author">James Clear</div>
+          <div class="how-book-skill"><svg class="icon" width="9" height="9" viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg> Hábitos &amp; Disciplina</div>
+        </div>
+      </div>
+      <div class="how-book">
+        <div class="how-book-cover"><svg class="icon icon-gold" width="18" height="18" viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 14H8v-2h8v2zm0-4H8v-2h8v2zm0-4H8V6h8v2z"/></svg></div>
+        <div class="how-book-info">
+          <div class="how-book-title">Inteligencia Emocional</div>
+          <div class="how-book-author">Daniel Goleman</div>
+          <div class="how-book-skill"><svg class="icon" width="9" height="9" viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg> Gestión Emocional</div>
+        </div>
+      </div>
+      <div class="how-book">
+        <div class="how-book-cover"><svg class="icon icon-gold" width="18" height="18" viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 14H8v-2h8v2zm0-4H8v-2h8v2zm0-4H8V6h8v2z"/></svg></div>
+        <div class="how-book-info">
+          <div class="how-book-title">Deep Work</div>
+          <div class="how-book-author">Cal Newport</div>
+          <div class="how-book-skill"><svg class="icon" width="9" height="9" viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg> Foco &amp; Productividad</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div class="features-section">
+  <div class="features-inner">
+    <div class="section-label">Lo que incluye</div>
+    <h2>Más que un libro,<br><em>un sistema de aprendizaje</em></h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon"><svg class="icon icon-gold" width="20" height="20" viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 14H8v-2h8v2zm0-4H8v-2h8v2zm0-4H8V6h8v2z"/></svg></div>
+        <h3>Libro seleccionado</h3>
+        <p>El libro físico o digital cuidadosamente elegido por nuestros mentores según la habilidad que quieres desarrollar.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg class="icon icon-gold" width="20" height="20" viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg></div>
+        <h3>Guía de aplicación</h3>
+        <p>Un cuaderno de ejercicios prácticos diseñado para que apliques cada concepto del libro en tu vida real.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg class="icon icon-gold" width="20" height="20" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+        <h3>Mentoría incluida</h3>
+        <p>Acceso a una sesión con el mentor especialista en la habilidad del libro para resolver dudas y guiar tu proceso.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<div class="skills-section">
+  <div class="section-label">Habilidades disponibles</div>
+  <h2>Elige la habilidad que<br><em>quieres desarrollar</em></h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <span class="skill-emoji">⚡</span>
+      <div class="skill-name">Productividad</div>
+      <div class="skill-desc">Foco, gestión del tiempo y sistemas de trabajo efectivos.</div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-emoji">🧠</span>
+      <div class="skill-name">Mentalidad</div>
+      <div class="skill-desc">Hábitos, disciplina y mentalidad de crecimiento.</div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-emoji">💼</span>
+      <div class="skill-name">Liderazgo</div>
+      <div class="skill-desc">Comunicación, influencia y gestión de equipos.</div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-emoji">💰</span>
+      <div class="skill-name">Finanzas</div>
+      <div class="skill-desc">Inversión, ahorro y libertad financiera personal.</div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-emoji">🤝</span>
+      <div class="skill-name">Relaciones</div>
+      <div class="skill-desc">Inteligencia emocional, empatía y habilidades sociales.</div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-emoji">🚀</span>
+      <div class="skill-name">Emprendimiento</div>
+      <div class="skill-desc">Estrategia, innovación y construcción de negocios.</div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-emoji">✍️</span>
+      <div class="skill-name">Escritura</div>
+      <div class="skill-desc">Comunicación escrita, storytelling y persuasión.</div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-emoji">🎯</span>
+      <div class="skill-name">Enfoque</div>
+      <div class="skill-desc">Claridad de objetivos, toma de decisiones y ejecución.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
+<div class="final-cta">
+  <div class="section-label" style="justify-content:center;"><span></span>Empieza hoy</div>
+  <h2>Un libro.<br><em>Una habilidad nueva.</em></h2>
+  <p>Cuéntanos qué habilidad quieres desarrollar y te recomendamos el SkillBook perfecto para ti.</p>
+  <a href="https://wa.me/59163509172?text=Hola%2C%20quiero%20un%20SkillBook.%20La%20habilidad%20que%20quiero%20desarrollar%20es%3A%20" target="_blank" class="btn-primary" style="font-size:16px;padding:18px 40px;">
+    <svg class="icon" width="18" height="18" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.099 1.51 5.822L0 24l6.336-1.498A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.646-.493-5.172-1.355l-.371-.219-3.763.889.938-3.647-.24-.386A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    Quiero mi SkillBook →
+  </a>
+</div>
+
+<footer>
+  <div class="footer-logo">✦ San Pablo Academy — SkillBook</div>
+  <div class="footer-tagline">Libros recomendados con guía de aplicación práctica.</div>
+  <a href="https://wa.me/59163509172" target="_blank" style="color:#c9a84c;text-decoration:none;font-size:12px;">+591 63509172</a>
+</footer>
+
+</body>
+</html>
