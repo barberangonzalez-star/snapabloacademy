@@ -157,6 +157,22 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:44px 48px;display:fle
   .hero h1{font-size:32px;}
   .benefit-card,.step,.testimonial-card{flex:0 0 86vw;}
 }
+
+/* ── MOBILE NAV FIX ── */
+@media(max-width:768px){
+  nav{padding:12px 16px;background:rgba(10,10,10,0.98);flex-wrap:nowrap;gap:8px;}
+  .nav-logo{gap:7px;min-width:0;flex-shrink:1;}
+  .nav-logo img{height:26px;width:26px;flex-shrink:0;}
+  .nav-logo-text{font-size:11px;letter-spacing:0.06em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px;}
+  .nav-links{display:none!important;}
+  .nav-back{font-size:11px;white-space:nowrap;flex-shrink:0;}
+  .nav-cta{padding:8px 11px;font-size:11px;white-space:nowrap;flex-shrink:0;}
+}
+@media(max-width:400px){
+  nav{padding:10px 12px;}
+  .nav-logo-text{display:none;}
+  .nav-cta{padding:7px 10px;font-size:10px;}
+}
 </style>
 </head>
 <body>
@@ -251,7 +267,7 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:44px 48px;display:fle
           <div class="email-dot" style="background:#e67e22;display:inline-block;margin-left:4px;"></div>
           <div class="email-dot" style="background:#27ae60;display:inline-block;margin-left:4px;"></div>
         </div>
-        <div class="email-from"><strong>San Pablo Academy</strong>newsletter@sanpablo.com</div>
+        <div class="email-from"><strong>San Pablo Academy</strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="355b5042465950414150477546545b455457595a1b565a58">[email&#160;protected]</a></div>
       </div>
       <div class="email-title-line">
         <svg class="icon icon-gold" width="14" height="14" viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 14H8v-2h8v2zm0-4H8v-2h8v2zm0-4H8V6h8v2z"/></svg>
@@ -393,7 +409,10 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:44px 48px;display:fle
 <footer>
   <div class="footer-logo">✦ San Pablo Academy — Newsletter Consciente</div>
   <div class="footer-tagline">Donde la lectura se transforma en ejecución.</div>
-  <a href="https://wa.me/59163509172" target="_blank" style="color:#c9a84c;text-decoration:none;font-size:12px;">+591 63509172</a>
+  <a href="https://wa.me/59163509172" target="_blank" style="color:#c9a84c;text-decoration:none;font-size:12px;display:inline-flex;align-items:center;gap:5px;">
+    <svg class="icon icon-gold" width="13" height="13" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.099 1.51 5.822L0 24l6.336-1.498A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.646-.493-5.172-1.355l-.371-.219-3.763.889.938-3.647-.24-.386A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    +591 63509172
+  </a>
 </footer>
 
 </body>
