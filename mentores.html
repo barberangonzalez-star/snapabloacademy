@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuestros Mentores – San Pablo Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:ital,wght@0,300;0,400;0,600;0,700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0a0a0a;--card:#161616;--border:rgba(255,255,255,0.08);--white:#f5f0e8;--gold:#c9a84c;--gold-light:#e8c97a;--gray:#888;--text:#d4cfc6;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{background:#0a0a0a;color:#f5f0e8;font-family:"DM Sans",sans-serif;overflow-x:hidden;}
+.icon{display:inline-block;vertical-align:middle;fill:currentColor;flex-shrink:0;}
+.icon-gold{color:#c9a84c;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,10,0.97);border-bottom:1px solid rgba(255,255,255,0.05);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo img{height:32px;width:auto;}
+.nav-logo-text{font-size:13px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#c9a84c;}
+.nav-back{color:#888;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:color .2s;}
+.nav-back:hover{color:#c9a84c;}
+.nav-cta{background:#c9a84c;color:#0a0a0a;padding:10px 22px;font-family:"DM Sans",sans-serif;font-weight:700;font-size:13px;text-decoration:none;display:inline-flex;align-items:center;gap:7px;transition:background .2s;}
+.nav-cta:hover{background:#e8c97a;}
+
+/* HERO */
+.hero{padding:140px 48px 80px;text-align:center;position:relative;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(201,168,76,0.08) 0%,transparent 70%);}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid #c9a84c;color:#c9a84c;padding:5px 14px;font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:24px;}
+.hero h1{font-family:"Playfair Display",serif;font-size:clamp(36px,6vw,72px);font-weight:900;line-height:1.05;letter-spacing:-0.02em;margin-bottom:16px;color:#f5f0e8;}
+.hero h1 em{font-style:normal;color:#c9a84c;}
+.hero p{font-size:17px;color:#d4cfc6;max-width:520px;margin:0 auto;line-height:1.7;}
+
+/* FILTER */
+.filter-wrap{max-width:1200px;margin:0 auto;padding:0 48px 40px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.filter-label{font-size:11px;color:#888;letter-spacing:0.1em;text-transform:uppercase;margin-right:4px;}
+.filter-btn{background:transparent;border:1px solid rgba(255,255,255,0.12);color:#888;padding:7px 18px;font-family:"DM Sans",sans-serif;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:all .2s;}
+.filter-btn.active,.filter-btn:hover{border-color:#c9a84c;color:#c9a84c;background:rgba(201,168,76,0.06);}
+
+/* GRID */
+.mentores-wrap{max-width:1200px;margin:0 auto;padding:0 48px 96px;}
+.mentores-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2px;}
+
+/* MENTOR CARD */
+.mentor-card{background:#161616;border:1px solid rgba(255,255,255,0.08);overflow:hidden;cursor:pointer;transition:border-color .3s,transform .25s;display:flex;flex-direction:column;}
+.mentor-card:hover{border-color:rgba(201,168,76,0.45);transform:translateY(-3px);}
+.mentor-card-img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block;background:#1a1a1a;}
+.mentor-card-ph{width:100%;aspect-ratio:4/5;background:linear-gradient(160deg,#1a1a1a 0%,#222 100%);display:flex;align-items:center;justify-content:center;}
+.mentor-card-ph svg{opacity:0.12;}
+.mentor-card-body{padding:22px;flex:1;display:flex;flex-direction:column;gap:6px;}
+.mentor-card-tag{font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#c9a84c;}
+.mentor-card-name{font-family:"Playfair Display",serif;font-size:20px;font-weight:700;color:#f5f0e8;line-height:1.2;}
+.mentor-card-prof{font-size:13px;color:#888;margin-top:2px;}
+.mentor-card-skills{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.skill-tag{display:inline-flex;padding:3px 10px;font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);color:#c9a84c;}
+.mentor-card-footer{padding:14px 22px;border-top:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:space-between;}
+.mentor-card-clubs{font-size:11px;color:#888;}
+.mentor-card-clubs span{color:#c9a84c;font-weight:700;}
+.btn-ver{background:#c9a84c;color:#0a0a0a;padding:8px 18px;font-family:"DM Sans",sans-serif;font-weight:700;font-size:12px;border:none;cursor:pointer;transition:background .2s;}
+.btn-ver:hover{background:#e8c97a;}
+
+/* EMPTY */
+.empty-state{text-align:center;padding:80px;grid-column:1/-1;}
+.empty-state h3{font-family:"Playfair Display",serif;font-size:22px;color:#f5f0e8;margin-bottom:8px;}
+.empty-state p{color:#888;font-size:14px;}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:900;display:none;align-items:center;justify-content:center;padding:24px;}
+.modal-overlay.open{display:flex;}
+.modal{background:#161616;border:1px solid rgba(201,168,76,0.3);max-width:580px;width:100%;max-height:92vh;overflow-y:auto;position:relative;display:flex;flex-direction:column;}
+.modal-close{position:absolute;top:14px;right:14px;background:none;border:none;color:#888;cursor:pointer;font-size:20px;z-index:1;line-height:1;}
+.modal-close:hover{color:#f5f0e8;}
+.modal-top{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,0.06);}
+.modal-photo{width:180px;flex-shrink:0;object-fit:cover;object-position:top;display:block;background:#1a1a1a;}
+.modal-photo-ph{width:180px;flex-shrink:0;background:linear-gradient(160deg,#1a1a1a,#222);display:flex;align-items:center;justify-content:center;}
+.modal-photo-ph svg{opacity:0.12;}
+.modal-intro{padding:28px 24px;flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;}
+.modal-tag{font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#c9a84c;}
+.modal-name{font-family:"Playfair Display",serif;font-size:24px;font-weight:900;color:#f5f0e8;line-height:1.15;}
+.modal-prof{font-size:14px;color:#888;margin-top:2px;}
+.modal-skills{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
+.modal-body{padding:24px 28px;display:flex;flex-direction:column;gap:18px;}
+.modal-section-title{font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#c9a84c;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.modal-section-title::after{content:"";flex:1;height:1px;background:rgba(255,255,255,0.06);}
+.modal-bio{font-size:14px;color:#d4cfc6;line-height:1.75;}
+.modal-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.modal-meta-item{background:#1a1a1a;padding:14px 16px;}
+.modal-meta-label{font-size:10px;color:#888;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;}
+.modal-meta-value{font-size:14px;color:#f5f0e8;font-weight:600;}
+.modal-wa{background:#25d366;color:#fff;padding:14px;font-family:"DM Sans",sans-serif;font-weight:700;font-size:14px;border:none;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .2s;margin:0 28px 24px;}
+.modal-wa:hover{background:#1fbb57;}
+
+/* FOOTER */
+footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.footer-logo{font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#c9a84c;}
+.footer-tagline{font-size:12px;color:#888;}
+
+@media(max-width:900px){
+  nav{padding:13px 20px;}
+  .hero{padding:110px 20px 60px;}
+  .filter-wrap,.mentores-wrap{padding-left:20px;padding-right:20px;}
+  .mentores-grid{grid-template-columns:repeat(2,1fr);}
+  .modal-top{flex-direction:column;}
+  .modal-photo,.modal-photo-ph{width:100%;height:200px;}
+  .modal-meta-grid{grid-template-columns:1fr;}
+  footer{flex-direction:column;text-align:center;padding:28px 20px;}
+}
+@media(max-width:480px){
+  nav{padding:11px 14px;}
+  .nav-logo-text{display:none;}
+  .mentores-grid{grid-template-columns:1fr;}
+  .modal-wa{margin:0 20px 20px;}
+  .modal-body{padding:20px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.png" alt="" onerror="this.style.display='none'">
+    <span class="nav-logo-text">San Pablo Academy</span>
+  </a>
+  <a href="skillbook.html" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+    SkillBook
+  </a>
+  <a href="https://wa.me/59163509172?text=Hola%2C%20quiero%20contactar%20a%20un%20mentor" target="_blank" class="nav-cta">
+    <svg class="icon" width="13" height="13" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.099 1.51 5.822L0 24l6.336-1.498A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.646-.493-5.172-1.355l-.371-.219-3.763.889.938-3.647-.24-.386A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    Contactar mentor
+  </a>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">✦ San Pablo Academy</div>
+  <h1>Nuestros<br><em>Mentores</em></h1>
+  <p>Profesionales expertos que guían cada club y SkillBook. Conoce a las personas detrás de tu crecimiento.</p>
+</div>
+
+<div class="filter-wrap">
+  <span class="filter-label">Especialidad:</span>
+  <button class="filter-btn active" onclick="filterMentores(this,'todos')">Todos</button>
+  <button class="filter-btn" onclick="filterMentores(this,'habitos')">Hábitos</button>
+  <button class="filter-btn" onclick="filterMentores(this,'liderazgo')">Liderazgo</button>
+  <button class="filter-btn" onclick="filterMentores(this,'psicologia')">Psicología</button>
+  <button class="filter-btn" onclick="filterMentores(this,'negocios')">Negocios</button>
+  <button class="filter-btn" onclick="filterMentores(this,'historia')">Historia</button>
+</div>
+
+<div class="mentores-wrap">
+  <div class="mentores-grid" id="mentoresGrid"></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeMBg(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-top">
+      <img id="mPhoto" class="modal-photo" src="" alt="" style="display:none;">
+      <div id="mPhotoPh" class="modal-photo-ph" style="display:none;"><svg width="56" height="56" viewBox="0 0 24 24" fill="#333"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+      <div class="modal-intro">
+        <div class="modal-tag" id="mTag"></div>
+        <div class="modal-name" id="mName"></div>
+        <div class="modal-prof" id="mProf"></div>
+        <div class="modal-skills" id="mSkills"></div>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div>
+        <div class="modal-section-title">Sobre el mentor</div>
+        <div class="modal-bio" id="mBio"></div>
+      </div>
+      <div>
+        <div class="modal-section-title">Información</div>
+        <div class="modal-meta-grid" id="mMeta"></div>
+      </div>
+    </div>
+    <a id="mWa" href="#" target="_blank" class="modal-wa">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.099 1.51 5.822L0 24l6.336-1.498A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.646-.493-5.172-1.355l-.371-.219-3.763.889.938-3.647-.24-.386A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      Contactar a este mentor
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">✦ San Pablo Academy — Mentores</div>
+  <div class="footer-tagline">Profesionales que transforman la lectura en crecimiento real.</div>
+  <a href="https://wa.me/59163509172" target="_blank" style="color:#c9a84c;text-decoration:none;font-size:12px;">+591 63509172</a>
+</footer>
+
+<script>
+const KEY = 'sp_mentores_v1';
+
+function getMentores() {
+  try { const r = localStorage.getItem(KEY); return r ? JSON.parse(r) : defaults(); }
+  catch(e) { return defaults(); }
+}
+
+function defaults() {
+  const m = [
+    {id:1,nombre:'María González',profesion:'Coach de Hábitos y Bienestar',especialidad:'habitos',bio:'Coach certificada con más de 8 años acompañando a personas en el desarrollo de hábitos sostenibles. Especialista en el método de James Clear y en psicología del comportamiento aplicada al cambio personal.',experiencia:'8 años',clubes:3,skillbooks:2,foto:'',ciudad:'La Paz',skills:['Hábitos','Productividad','Bienestar']},
+    {id:2,nombre:'Carlos Mamani',profesion:'Psicólogo Clínico y Mindfulness',especialidad:'psicologia',bio:'Psicólogo clínico especializado en terapia cognitivo-conductual y prácticas de mindfulness. Guía grupos de meditación y lectura consciente desde hace 6 años, combinando la psicología occidental con filosofías orientales.',experiencia:'6 años',clubes:4,skillbooks:1,foto:'',ciudad:'Cochabamba',skills:['Mindfulness','Psicología','Meditación']},
+    {id:3,nombre:'Ana Rodríguez',profesion:'Economista Conductual',especialidad:'negocios',bio:'Economista con maestría en Economía Conductual aplicada a la toma de decisiones. Apasionada por divulgar la ciencia del comportamiento humano de forma práctica y accesible para el público general.',experiencia:'5 años',clubes:2,skillbooks:3,foto:'',ciudad:'La Paz',skills:['Economía','Decisiones','Conducta']},
+    {id:4,nombre:'Luis Pereira',profesion:'Psicoterapeuta',especialidad:'psicologia',bio:'Psicoterapeuta con enfoque humanista y existencial. Trabaja con personas en búsqueda de sentido y propósito de vida, integrando la bibliografía de Viktor Frankl con dinámicas grupales de reflexión profunda.',experiencia:'10 años',clubes:3,skillbooks:1,foto:'',ciudad:'Santa Cruz',skills:['Logoterapia','Sentido','Existencial']},
+    {id:5,nombre:'Patricia Vega',profesion:'Consultora de Liderazgo',especialidad:'liderazgo',bio:'Consultora organizacional con amplia experiencia en desarrollo de liderazgo y cultura empresarial. Ha trabajado con equipos de más de 30 empresas en Bolivia y la región, aplicando los principios de Covey en contextos reales.',experiencia:'12 años',clubes:5,skillbooks:4,foto:'',ciudad:'La Paz',skills:['Liderazgo','Equipos','Cultura']},
+    {id:6,nombre:'Sofía Cárdenas',profesion:'Psicóloga Organizacional',especialidad:'psicologia',bio:'Especialista en inteligencia emocional aplicada al entorno laboral y relaciones interpersonales. Facilita talleres de gestión emocional para equipos y acompaña procesos de desarrollo personal con base en evidencia científica.',experiencia:'7 años',clubes:4,skillbooks:2,foto:'',ciudad:'Cochabamba',skills:['IE','Emociones','Organizacional']},
+    {id:7,nombre:'Roberto Arce',profesion:'Estratega de Negocios',especialidad:'negocios',bio:'Consultor estratégico con experiencia en startups y empresas consolidadas. Aplica el pensamiento estratégico clásico —desde Sun Tzu hasta Porter— en diagnósticos y planes de negocio concretos y ejecutables.',experiencia:'9 años',clubes:2,skillbooks:3,foto:'',ciudad:'Santa Cruz',skills:['Estrategia','Negocios','Startups']},
+    {id:8,nombre:'Carmen Flores',profesion:'Historiadora y Docente',especialidad:'historia',bio:'Doctora en Historia con especialización en historia global y pensamiento crítico. Lleva más de 15 años enseñando en universidades y facilitando espacios de reflexión histórica que conectan el pasado con los desafíos del presente.',experiencia:'15 años',clubes:3,skillbooks:1,foto:'',ciudad:'La Paz',skills:['Historia','Pensamiento crítico','Docencia']}
+  ];
+  localStorage.setItem(KEY, JSON.stringify(m));
+  return m;
+}
+
+function renderMentores(filter) {
+  const all = getMentores();
+  const list = filter==='todos' ? all : all.filter(m=>m.especialidad===filter);
+  const grid = document.getElementById('mentoresGrid');
+  if(!list.length){
+    grid.innerHTML='<div class="empty-state"><h3>Sin mentores en esta especialidad</h3><p>Próximamente más mentores.</p></div>';
+    return;
+  }
+  grid.innerHTML = list.map(m => {
+    const imgHTML = m.foto
+      ? '<img class="mentor-card-img" src="'+m.foto+'" alt="'+m.nombre+'">' 
+      : '<div class="mentor-card-ph"><svg width="52" height="52" viewBox="0 0 24 24" fill="#2a2a2a"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>';
+    const skills = (m.skills||[]).slice(0,3).map(s=>'<span class="skill-tag">'+s+'</span>').join('');
+    return '<div class="mentor-card" onclick="openModal('+m.id+')">'+imgHTML+'<div class="mentor-card-body"><div class="mentor-card-tag">'+m.especialidad.charAt(0).toUpperCase()+m.especialidad.slice(1)+'</div><div class="mentor-card-name">'+m.nombre+'</div><div class="mentor-card-prof">'+m.profesion+'</div><div class="mentor-card-skills">'+skills+'</div></div><div class="mentor-card-footer"><div class="mentor-card-clubs">'+m.clubes+' <span>clubes</span> · '+m.skillbooks+' <span>skillbooks</span></div><button class="btn-ver" onclick="event.stopPropagation();openModal('+m.id+')">Ver perfil →</button></div></div>';
+  }).join('');
+}
+
+function filterMentores(btn, filter) {
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderMentores(filter);
+}
+
+function openModal(id) {
+  const m = getMentores().find(x=>x.id===id); if(!m) return;
+  const photo = document.getElementById('mPhoto');
+  const photoPh = document.getElementById('mPhotoPh');
+  if(m.foto){ photo.src=m.foto; photo.style.display='block'; photoPh.style.display='none'; }
+  else { photo.style.display='none'; photoPh.style.display='flex'; }
+  document.getElementById('mTag').textContent = m.especialidad.charAt(0).toUpperCase()+m.especialidad.slice(1);
+  document.getElementById('mName').textContent = m.nombre;
+  document.getElementById('mProf').textContent = m.profesion;
+  document.getElementById('mSkills').innerHTML = (m.skills||[]).map(s=>'<span class="skill-tag">'+s+'</span>').join('');
+  document.getElementById('mBio').textContent = m.bio;
+  document.getElementById('mMeta').innerHTML =
+    '<div class="modal-meta-item"><div class="modal-meta-label">Experiencia</div><div class="modal-meta-value">'+m.experiencia+'</div></div>'+
+    '<div class="modal-meta-item"><div class="modal-meta-label">Ciudad</div><div class="modal-meta-value">'+m.ciudad+'</div></div>'+
+    '<div class="modal-meta-item"><div class="modal-meta-label">Clubes guiados</div><div class="modal-meta-value">'+m.clubes+'</div></div>'+
+    '<div class="modal-meta-item"><div class="modal-meta-label">SkillBooks</div><div class="modal-meta-value">'+m.skillbooks+'</div></div>';
+  document.getElementById('mWa').href = 'https://wa.me/59163509172?text='+encodeURIComponent('Hola, quiero contactar al mentor '+m.nombre+' para saber más sobre sus programas');
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeMBg(e){if(e.target===document.getElementById('modalOverlay'))closeModal();}
+function closeModal(){document.getElementById('modalOverlay').classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+renderMentores('todos');
+</script>
+</body>
+</html>

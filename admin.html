@@ -128,11 +128,20 @@ body{background:#0a0a0a;color:#f5f0e8;font-family:'DM Sans',sans-serif;}
     <div class="dash-nav-right">
       <a href="index.html" class="dash-nav-link" target="_blank">Landing →</a>
       <a href="clubes.html" class="dash-nav-link" target="_blank">Clubes →</a>
+      <a href="mentores.html" class="dash-nav-link" target="_blank">Mentores →</a>
       <button class="btn-logout" onclick="doLogout()">Salir</button>
     </div>
   </nav>
 
   <div class="dash-content">
+    <!-- TABS -->
+    <div style="display:flex;gap:2px;margin-bottom:32px;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:0;">
+      <button id="tabClubs" onclick="switchTab('clubs')" style="background:#c9a84c;color:#0a0a0a;padding:10px 24px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;border:none;cursor:pointer;letter-spacing:0.05em;">Clubes de Lectura</button>
+      <button id="tabMentores" onclick="switchTab('mentores')" style="background:transparent;color:#888;padding:10px 24px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;border:none;cursor:pointer;letter-spacing:0.05em;transition:all .2s;">Mentores</button>
+    </div>
+
+    <!-- CLUBS TAB -->
+    <div id="panelClubs">
     <div class="dash-header">
       <div class="dash-title">Clubes de <em>Lectura</em></div>
       <button class="btn-new" onclick="openForm()">
@@ -162,6 +171,39 @@ body{background:#0a0a0a;color:#f5f0e8;font-family:'DM Sans',sans-serif;}
           </tr>
         </thead>
         <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </div>
+  </div><!-- end panelClubs -->
+
+  <!-- MENTORES TAB -->
+  <div id="panelMentores" style="display:none;">
+    <div class="dash-header">
+      <div class="dash-title">Nuestros <em>Mentores</em></div>
+      <button class="btn-new" onclick="openMentorForm()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+        Nuevo Mentor
+      </button>
+    </div>
+    <div class="stats-row" style="grid-template-columns:repeat(3,1fr);">
+      <div class="stat-card"><div class="stat-num" id="mTotal">0</div><div class="stat-label">Total mentores</div></div>
+      <div class="stat-card"><div class="stat-num" id="mClubs">0</div><div class="stat-label">Clubes guiados</div></div>
+      <div class="stat-card"><div class="stat-num" id="mSkills">0</div><div class="stat-label">SkillBooks</div></div>
+    </div>
+    <div class="table-wrap">
+      <table class="clubs-table">
+        <thead>
+          <tr>
+            <th>Foto</th>
+            <th>Nombre</th>
+            <th>Profesión</th>
+            <th>Especialidad</th>
+            <th>Ciudad</th>
+            <th>Clubes</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="mtbody"></tbody>
       </table>
     </div>
   </div>
@@ -235,6 +277,70 @@ body{background:#0a0a0a;color:#f5f0e8;font-family:'DM Sans',sans-serif;}
     <div class="form-actions">
       <button class="btn-save" onclick="saveClub()">Guardar Club</button>
       <button class="btn-cancel" onclick="closeForm()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MENTOR FORM -->
+<div class="form-overlay" id="mentorFormOverlay">
+  <div class="form-box">
+    <button class="form-close" onclick="closeMentorForm()">✕</button>
+    <div class="form-title" id="mentorFormTitle">Nuevo <em>Mentor</em></div>
+    <input type="hidden" id="mEditId">
+    <div class="form-grid">
+      <div class="form-group full">
+        <label class="form-label">Nombre completo *</label>
+        <input class="form-input" id="mNombre" placeholder="ej. María González">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Profesión *</label>
+        <input class="form-input" id="mProfesion" placeholder="ej. Coach de Hábitos">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Especialidad</label>
+        <select class="form-select" id="mEspecialidad">
+          <option value="habitos">Hábitos</option>
+          <option value="liderazgo">Liderazgo</option>
+          <option value="psicologia">Psicología</option>
+          <option value="negocios">Negocios</option>
+          <option value="historia">Historia</option>
+          <option value="otro">Otro</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Ciudad</label>
+        <input class="form-input" id="mCiudad" placeholder="ej. La Paz">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Años de experiencia</label>
+        <input class="form-input" id="mExperiencia" placeholder="ej. 8 años">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Clubes guiados</label>
+        <input class="form-input" id="mClubsN" type="number" placeholder="0" min="0">
+      </div>
+      <div class="form-group">
+        <label class="form-label">SkillBooks</label>
+        <input class="form-input" id="mSkillsN" type="number" placeholder="0" min="0">
+      </div>
+      <div class="form-group full">
+        <label class="form-label">URL foto del mentor</label>
+        <input class="form-input" id="mFoto" placeholder="https://..." oninput="previewMFoto()">
+        <div class="form-note">URL de una foto profesional del mentor</div>
+        <img id="mFotoPrev" class="img-preview" alt="Vista previa">
+      </div>
+      <div class="form-group full">
+        <label class="form-label">Habilidades (separadas por coma)</label>
+        <input class="form-input" id="mSkillTags" placeholder="ej. Hábitos, Productividad, Bienestar">
+      </div>
+      <div class="form-group full">
+        <label class="form-label">Biografía *</label>
+        <textarea class="form-textarea" id="mBio" placeholder="Descripción del mentor, su experiencia y enfoque..." style="min-height:100px;"></textarea>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn-save" onclick="saveMentor()">Guardar Mentor</button>
+      <button class="btn-cancel" onclick="closeMentorForm()">Cancelar</button>
     </div>
   </div>
 </div>
@@ -391,7 +497,123 @@ function toast(msg, err) {
   setTimeout(()=>{ t.className='toast'; }, 3000);
 }
 
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeForm(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeForm(); closeMentorForm(); } });
+
+// ── TABS ──────────────────────────────────────────────
+function switchTab(tab) {
+  const isClubs = tab === 'clubs';
+  document.getElementById('panelClubs').style.display = isClubs ? 'block' : 'none';
+  document.getElementById('panelMentores').style.display = isClubs ? 'none' : 'block';
+  document.getElementById('tabClubs').style.background = isClubs ? '#c9a84c' : 'transparent';
+  document.getElementById('tabClubs').style.color = isClubs ? '#0a0a0a' : '#888';
+  document.getElementById('tabMentores').style.background = isClubs ? 'transparent' : '#c9a84c';
+  document.getElementById('tabMentores').style.color = isClubs ? '#888' : '#0a0a0a';
+  if (!isClubs) { renderMentores(); mentorStats(); }
+}
+
+// ── MENTORES DATA ─────────────────────────────────────
+const MKEY = 'sp_mentores_v1';
+function getMentores() {
+  try { const r = localStorage.getItem(MKEY); return r ? JSON.parse(r) : []; } catch(e) { return []; }
+}
+function setMentores(m) { localStorage.setItem(MKEY, JSON.stringify(m)); }
+function nextMId(m) { return m.length ? Math.max(...m.map(x=>x.id))+1 : 1; }
+
+function mentorStats() {
+  const m = getMentores();
+  document.getElementById('mTotal').textContent = m.length;
+  document.getElementById('mClubs').textContent = m.reduce((s,x)=>s+(x.clubes||0),0);
+  document.getElementById('mSkills').textContent = m.reduce((s,x)=>s+(x.skillbooks||0),0);
+}
+
+function renderMentores() {
+  const m = getMentores();
+  const tbody = document.getElementById('mtbody');
+  if(!m.length){ tbody.innerHTML=`<tr class="empty-row"><td colspan="7">Sin mentores. Haz clic en "Nuevo Mentor".</td></tr>`; return; }
+  tbody.innerHTML = m.map(x=>`
+    <tr>
+      <td>${x.foto?`<img class="td-img" src="${x.foto}" alt="" style="border-radius:0;">`:`<div class="td-img-ph"><svg width="16" height="16" viewBox="0 0 24 24" fill="#333"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>`}</td>
+      <td><div class="td-title">${x.nombre}</div></td>
+      <td><div style="font-size:13px;color:#d4cfc6;">${x.profesion}</div></td>
+      <td><span class="badge badge-proximo" style="font-size:10px;">${x.especialidad||'—'}</span></td>
+      <td style="font-size:13px;color:#888;">${x.ciudad||'—'}</td>
+      <td style="text-align:center;font-weight:700;color:#c9a84c;">${x.clubes||0}</td>
+      <td><div class="td-actions">
+        <button class="btn-edit" onclick="openMentorForm(${x.id})">Editar</button>
+        <button class="btn-del" onclick="delMentor(${x.id})">Eliminar</button>
+      </div></td>
+    </tr>`).join('');
+}
+
+function openMentorForm(id) {
+  document.getElementById('mentorFormOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  clearMentorForm();
+  if(id) {
+    const m = getMentores().find(x=>x.id===id); if(!m) return;
+    document.getElementById('mentorFormTitle').innerHTML='Editar <em>Mentor</em>';
+    document.getElementById('mEditId').value=id;
+    document.getElementById('mNombre').value=m.nombre||'';
+    document.getElementById('mProfesion').value=m.profesion||'';
+    document.getElementById('mEspecialidad').value=m.especialidad||'habitos';
+    document.getElementById('mCiudad').value=m.ciudad||'';
+    document.getElementById('mExperiencia').value=m.experiencia||'';
+    document.getElementById('mClubsN').value=m.clubes||0;
+    document.getElementById('mSkillsN').value=m.skillbooks||0;
+    document.getElementById('mFoto').value=m.foto||'';
+    document.getElementById('mSkillTags').value=(m.skills||[]).join(', ');
+    document.getElementById('mBio').value=m.bio||'';
+    previewMFoto();
+  } else {
+    document.getElementById('mentorFormTitle').innerHTML='Nuevo <em>Mentor</em>';
+    document.getElementById('mEditId').value='';
+  }
+}
+function clearMentorForm() {
+  ['mNombre','mProfesion','mCiudad','mExperiencia','mFoto','mSkillTags','mBio'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('mClubsN').value=0;
+  document.getElementById('mSkillsN').value=0;
+  document.getElementById('mEspecialidad').value='habitos';
+  document.getElementById('mFotoPrev').className='img-preview';
+}
+function closeMentorForm() {
+  document.getElementById('mentorFormOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function previewMFoto() {
+  const url=document.getElementById('mFoto').value.trim();
+  const img=document.getElementById('mFotoPrev');
+  if(url){img.src=url;img.className='img-preview show';}else{img.className='img-preview';}
+}
+function saveMentor() {
+  const nombre=document.getElementById('mNombre').value.trim();
+  const profesion=document.getElementById('mProfesion').value.trim();
+  const bio=document.getElementById('mBio').value.trim();
+  if(!nombre||!profesion){ toast('Completa los campos obligatorios (*)',true); return; }
+  const mentores=getMentores();
+  const eid=parseInt(document.getElementById('mEditId').value);
+  const skillsRaw=document.getElementById('mSkillTags').value;
+  const data={
+    nombre, profesion, bio,
+    especialidad:document.getElementById('mEspecialidad').value,
+    ciudad:document.getElementById('mCiudad').value.trim(),
+    experiencia:document.getElementById('mExperiencia').value.trim(),
+    clubes:parseInt(document.getElementById('mClubsN').value)||0,
+    skillbooks:parseInt(document.getElementById('mSkillsN').value)||0,
+    foto:document.getElementById('mFoto').value.trim(),
+    skills:skillsRaw.split(',').map(s=>s.trim()).filter(Boolean)
+  };
+  if(eid){ const i=mentores.findIndex(x=>x.id===eid); if(i>=0) mentores[i]={...mentores[i],...data}; }
+  else{ mentores.push({id:nextMId(mentores),...data}); }
+  setMentores(mentores);
+  renderMentores(); mentorStats(); closeMentorForm();
+  toast(eid?'Mentor actualizado ✓':'Mentor creado ✓');
+}
+function delMentor(id) {
+  if(!confirm('¿Eliminar este mentor?')) return;
+  setMentores(getMentores().filter(x=>x.id!==id));
+  renderMentores(); mentorStats(); toast('Mentor eliminado');
+}
 </script>
 </body>
 </html>
